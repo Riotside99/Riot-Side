@@ -13,27 +13,22 @@
             --light-blue: #e3f2fd;
             --dark-blue: #0056b3;
             --white: #ffffff;
-            --text-gray: #f8f9fa;
+            --error-red: #ff4444;
+            --success-green: #28a745;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
 
-        body {
-            background-color: #000;
-            color: var(--white);
-            overflow-x: hidden;
-        }
+        body { background-color: #000; color: var(--white); overflow-x: hidden; }
 
-        /* الخلفية */
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0, 20, 50, 0.7), rgba(0, 0, 0, 0.9)), url('https://i.imgur.com/Bku822J.jpeg') no-repeat center center;
+            background: linear-gradient(rgba(0, 20, 50, 0.75), rgba(0, 0, 0, 0.95)), url('https://i.imgur.com/Bku822J.jpeg') no-repeat center center;
             background-size: cover;
             z-index: -1;
         }
 
-        /* شريط التنقل */
         nav {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
@@ -42,9 +37,7 @@
             justify-content: space-between;
             align-items: center;
             position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            width: 100%; top: 0; z-index: 1000;
             border-bottom: 2px solid var(--primary-blue);
         }
 
@@ -56,105 +49,69 @@
         .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
         .nav-links a:hover { color: var(--primary-blue); }
 
-        /* القسم الرئيسي */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
+        section { padding: 100px 10% 50px; min-height: 80vh; }
+        .section-title { font-size: 35px; margin-bottom: 50px; text-align: center; color: var(--primary-blue); text-shadow: 0 0 15px rgba(0,123,255,0.4); }
 
-        .hero img {
-            width: 180px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px var(--primary-blue));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .hero h1 { font-size: clamp(40px, 8vw, 80px); font-weight: 900; color: var(--white); margin-bottom: 10px; }
-        .hero h1 span { color: var(--primary-blue); }
-        .hero p { max-width: 700px; font-size: 18px; color: var(--light-blue); line-height: 1.6; margin-bottom: 30px; }
-
-        .discord-btn {
-            background: var(--primary-blue);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 900;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.4s;
-            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
-        }
-
-        .discord-btn:hover {
-            transform: scale(1.1);
-            background: var(--white);
-            color: var(--primary-blue);
-            box-shadow: 0 0 30px var(--white);
-        }
-
-        /* الأقسام العامة */
-        section { padding: 100px 10% 50px; min-height: 60vh; }
-        .section-title { font-size: 35px; margin-bottom: 50px; text-align: center; color: var(--primary-blue); }
-
-        /* بطاقات القوانين والمميزات */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 123, 255, 0.3);
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .card:hover { background: rgba(0, 123, 255, 0.1); border-color: var(--primary-blue); transform: translateY(-10px); }
-        .card i { font-size: 40px; color: var(--primary-blue); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; color: var(--white); }
-        .card p { color: #ccc; font-size: 15px; }
-
-        /* قسم الصيانة */
-        .maintenance-status {
+        /* قسم التفعيل (الاختبار) */
+        .quiz-container {
             background: rgba(255, 255, 255, 0.05);
             padding: 40px;
             border-radius: 20px;
+            border: 1px solid var(--primary-blue);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .question { margin-bottom: 30px; display: none; animation: fadeIn 0.5s; }
+        .question.active { display: block; }
+        .question h3 { margin-bottom: 20px; font-size: 20px; color: var(--light-blue); }
+
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .option:hover { background: rgba(0, 123, 255, 0.2); border-color: var(--primary-blue); }
+        .option.selected { background: var(--primary-blue); color: white; }
+
+        .quiz-footer { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .btn {
+            padding: 10px 25px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-next { background: var(--primary-blue); color: white; }
+        .btn-submit { background: var(--success-green); color: white; display: none; }
+
+        /* قسم الإدارة (صيانة) */
+        .staff-maintenance {
             text-align: center;
-            border-right: 5px solid var(--primary-blue);
+            background: rgba(255, 0, 0, 0.05);
+            border: 2px dashed var(--error-red);
+            padding: 60px;
+            border-radius: 20px;
         }
-        .status-dot { height: 12px; width: 12px; background: #28a745; border-radius: 50%; display: inline-block; margin-left: 10px; animation: pulse 1.5s infinite; }
+        .staff-maintenance i { font-size: 60px; color: var(--error-red); margin-bottom: 20px; }
 
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        /* التنسيقات العامة */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero img { width: 180px; filter: drop-shadow(0 0 20px var(--primary-blue)); margin-bottom: 20px; }
+        .discord-btn { background: var(--primary-blue); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
 
-        /* حقوق الملكية */
-        footer {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            text-align: center;
-            border-top: 2px solid var(--primary-blue);
-            margin-top: 50px;
-        }
+        #result-area { text-align: center; display: none; }
+        .success-msg { color: var(--success-green); font-size: 24px; font-weight: bold; }
+        .fail-msg { color: var(--error-red); font-size: 24px; font-weight: bold; }
 
-        @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; }
-            .nav-links { gap: 10px; font-size: 13px; flex-wrap: wrap; justify-content: center; }
-        }
+        footer { background: rgba(0, 0, 0, 0.8); padding: 30px; text-align: center; border-top: 2px solid var(--primary-blue); margin-top: 50px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -168,9 +125,8 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#rules">القوانين</a></li>
-            <li><a href="#activation">التفعيل</a></li>
-            <li><a href="#staff">الإدارة</a></li>
+            <li><a href="#activation">اختبار التفعيل</a></li>
+            <li><a href="#staff">قسم الإدارة</a></li>
             <li><a href="#maintenance">الصيانة</a></li>
         </ul>
     </nav>
@@ -178,83 +134,143 @@
     <section id="home" class="hero">
         <img src="https://i.imgur.com/5BkALp7.png" alt="Logo">
         <h1>ريوت <span>سايد</span></h1>
-        <p>مرحباً بك في عالم الواقعية اللامحدود. سيرفر ريوت سايد يقدم لك تجربة حياة واقعية فريدة من نوعها مع مجتمع متفاعل وأنظمة متطورة تضمن لك المتعة والإثارة.</p>
-        <a href="https://discord.gg/YWFY5g4bY" target="_blank" class="discord-btn">
-            <i class="fab fa-discord"></i> دخول سيرفرنا ريوت سايد
-        </a>
-    </section>
-
-    <section id="rules">
-        <h2 class="section-title">قوانين السيرفر</h2>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fas fa-gavel"></i>
-                <h3>الاحترام المتبادل</h3>
-                <p>يمنع السب أو القذف أو الإساءة لأي عضو في المجتمع مهما كان السبب.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user-shield"></i>
-                <h3>الحياة الواقعية</h3>
-                <p>يجب الالتزام بقواعد الـ Roleplay وتمثيل الشخصية بشكل واقعي تماماً.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-ban"></i>
-                <h3>الغش والهاك</h3>
-                <p>استخدام أي برامج خارجية أو استغلال الثغرات يعرضك للباند النهائي فوراً.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="features">
-        <h2 class="section-title">لماذا ريوت سايد؟</h2>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fas fa-bolt"></i>
-                <h3>أداء عالٍ</h3>
-                <p>سكربتات مطورة خصيصاً لضمان سلاسة اللعب بدون "لاق".</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-car"></i>
-                <h3>سيارات حصرية</h3>
-                <p>مجموعة واسعة من السيارات الواقعية والمعدلة بلمسات ريوت سايد.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-briefcase"></i>
-                <h3>وظائف متنوعة</h3>
-                <p>من الشرطة والإسعاف إلى التجارة والمقاولات، اختر مسارك المهني.</p>
-            </div>
-        </div>
+        <p>مرحباً بك في اختبار التفعيل الإلكتروني لسيرفر ريوت سايد. أجب على الأسئلة بدقة للانتقال للمرحلة التالية.</p>
+        <a href="#activation" class="discord-btn">ابدأ الاختبار الآن</a>
     </section>
 
     <section id="activation">
-        <h2 class="section-title">التفعيل والإدارة</h2>
-        <div class="grid-container">
-            <div class="card" style="border-color: #fff;">
-                <i class="fas fa-id-card" style="color: #fff;"></i>
-                <h3>نظام التفعيل</h3>
-                <p>للحصول على التفعيل، توجه للديسكورد وقدم طلب المقابلة في الروم المخصص.</p>
+        <h2 class="section-title">نموذج التفعيل الإلكتروني</h2>
+        <div class="quiz-container" id="quiz-box">
+            
+            <div class="question active" data-correct="2">
+                <h3>1. ماذا يعني مصطلح (RDM) في الرول بلاي؟</h3>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1)">قتل شخص باستخدام سيارة</div>
+                    <div class="option" onclick="selectOption(this, 2)">قتل شخص عشوائياً بدون سبب درامي</div>
+                    <div class="option" onclick="selectOption(this, 3)">الخروج من السيرفر وقت السيناريو</div>
+                </div>
             </div>
-            <div class="card" style="border-color: #fff;">
-                <i class="fas fa-users-cog" style="color: #fff;"></i>
-                <h3>الطاقم الإداري</h3>
-                <p>إدارة ريوت سايد متواجدة على مدار الساعة لخدمتكم وضمان نظام السيرفر.</p>
+
+            <div class="question" data-correct="1">
+                <h3>2. إذا تعرضت لحادث سيارة قوي، ماذا يجب أن تفعل؟</h3>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1)">تمثيل الألم وعدم الحركة فوراً حتى يأتي الإسعاف</div>
+                    <div class="option" onclick="selectOption(this, 2)">إصلاح السيارة بالسكربت والهروب سريعاً</div>
+                    <div class="option" onclick="selectOption(this, 3)">الاستمرار في القيادة وكأن شيئاً لم يكن</div>
+                </div>
             </div>
+
+            <div class="question" data-correct="3">
+                <h3>3. ما هو الـ (Meta Gaming)؟</h3>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1)">التحدث بكلمات خارج اللعبة (OOC)</div>
+                    <div class="option" onclick="selectOption(this, 2)">سرقة سيارة شرطة بدون إذن</div>
+                    <div class="option" onclick="selectOption(this, 3)">استخدام معلومات عرفتها خارج اللعبة (مثل البثوث) داخل اللعبة</div>
+                </div>
+            </div>
+
+            <div class="question" data-correct="1">
+                <h3>4. ماذا تفعل إذا وجه شخص سلاحه نحوك وقال لك "ارفع يدك"؟</h3>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1)">الخضوع للأوامر (Fear RP) لأن حياتك في خطر</div>
+                    <div class="option" onclick="selectOption(this, 2)">سحب سلاحك ومحاولة قتله بسرعة</div>
+                    <div class="option" onclick="selectOption(this, 3)">الجري بعيداً والاتصال بالشرطة</div>
+                </div>
+            </div>
+
+            <div id="result-area">
+                <div id="result-msg"></div>
+                <div id="result-actions"></div>
+            </div>
+
+            <div class="quiz-footer" id="quiz-controls">
+                <span id="progress">سؤال 1 من 4</span>
+                <button class="btn btn-next" onclick="nextQuestion()">السؤال التالي</button>
+                <button class="btn btn-submit" onclick="showResults()">عرض النتيجة</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="staff">
+        <h2 class="section-title">طاقم الإدارة</h2>
+        <div class="staff-maintenance">
+            <i class="fas fa-tools"></i>
+            <h2 style="color: var(--error-red); margin-bottom: 10px;">القسم تحت الصيانة</h2>
+            <p style="color: #ccc;">نحن نقوم بتحديث قائمة الإدارة حالياً، سيتم توفير القسم قريباً.</p>
         </div>
     </section>
 
     <section id="maintenance">
         <h2 class="section-title">حالة الصيانة</h2>
-        <div class="maintenance-status">
-            <h3>حالة السيرفر الآن: <span style="color: #28a745;">يعمل بكفاءة</span> <div class="status-dot"></div></h3>
-            <p style="margin-top: 15px;">لا توجد أعمال صيانة مجدولة في الوقت الحالي. استمتع باللعب!</p>
+        <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; text-align: center; border-right: 5px solid var(--primary-blue);">
+            <h3>حالة السيرفر: <span style="color: var(--success-green);">يعمل بكفاءة</span></h3>
+            <p style="margin-top: 10px;">لا توجد أعمال صيانة عامة حالياً.</p>
         </div>
     </section>
 
     <footer>
-        <p>جميع الحقوق محفوظة © 2024 لـ <strong>ريوت سايد - Riot Side</strong></p>
-        <p style="font-size: 12px; color: #777; margin-top: 5px;">تم التصميم بكل حب لمجتمعنا الرهيب</p>
+        <p>جميع الحقوق محفوظة © 2026 لـ <strong>ريوت سايد - Riot Side</strong></p>
     </footer>
+
+    <script>
+        let currentStep = 0;
+        let score = 0;
+        const questions = document.querySelectorAll('.question');
+        const totalQuestions = questions.length;
+
+        function selectOption(el, index) {
+            const currentQuestion = questions[currentStep];
+            currentQuestion.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            el.parentElement.parentElement.dataset.userAnswer = index;
+        }
+
+        function nextQuestion() {
+            const currentQuestion = questions[currentStep];
+            if (!currentQuestion.dataset.userAnswer) {
+                alert("يرجى اختيار إجابة أولاً!");
+                return;
+            }
+
+            currentQuestion.classList.remove('active');
+            currentStep++;
+
+            if (currentStep < totalQuestions) {
+                questions[currentStep].classList.add('active');
+                document.getElementById('progress').innerText = `سؤال ${currentStep + 1} من ${totalQuestions}`;
+                if (currentStep === totalQuestions - 1) {
+                    document.querySelector('.btn-next').style.display = 'none';
+                    document.querySelector('.btn-submit').style.display = 'block';
+                }
+            }
+        }
+
+        function showResults() {
+            questions.forEach(q => {
+                if (q.dataset.userAnswer == q.dataset.correct) {
+                    score++;
+                }
+            });
+
+            document.getElementById('quiz-controls').style.display = 'none';
+            questions[currentStep].classList.remove('active');
+            const resultArea = document.getElementById('result-area');
+            const resultMsg = document.getElementById('result-msg');
+            const resultActions = document.getElementById('result-actions');
+            resultArea.style.display = 'block';
+
+            if (score >= 3) { // نسبة النجاح 75% فأكثر
+                resultMsg.innerHTML = `<p class="success-msg">مبروك! لقد اجتزت الاختبار بنجاح (${score}/${totalQuestions})</p>
+                <p style="margin-top:10px;">توجه الآن للديسكورد لاستلام رتبتك وإكمال التفعيل الصوتي.</p>`;
+                resultActions.innerHTML = `<a href="https://discord.gg/YWFY5g4bY" class="discord-btn">تسليم الرتبة في الديسكورد</a>`;
+            } else {
+                resultMsg.innerHTML = `<p class="fail-msg">للأسف لم تجتز الاختبار (${score}/${totalQuestions})</p>
+                <p style="margin-top:10px;">يجب عليك مراجعة قوانين الرول بلاي والمحاولة مرة أخرى.</p>`;
+                resultActions.innerHTML = `<button class="btn btn-next" onclick="location.reload()" style="margin-top:20px;">إعادة المحاولة</button>`;
+            }
+        }
+    </script>
 
 </body>
 </html>
-
+ 

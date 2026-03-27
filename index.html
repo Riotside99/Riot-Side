@@ -11,7 +11,6 @@
         :root {
             --primary-blue: #007bff;
             --light-blue: #e3f2fd;
-            --dark-blue: #0056b3;
             --white: #ffffff;
             --error-red: #ff4444;
             --success-green: #28a745;
@@ -52,6 +51,36 @@
         section { padding: 100px 10% 50px; min-height: 80vh; }
         .section-title { font-size: 35px; margin-bottom: 50px; text-align: center; color: var(--primary-blue); text-shadow: 0 0 15px rgba(0,123,255,0.4); }
 
+        /* الصفحة الرئيسية المعدلة */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero img { width: 160px; filter: drop-shadow(0 0 20px var(--primary-blue)); margin-bottom: 25px; }
+        .hero h1 { font-size: clamp(35px, 6vw, 70px); font-weight: 900; margin-bottom: 15px; }
+        .hero h1 span { color: var(--primary-blue); }
+        .hero p { max-width: 850px; font-size: 19px; color: #ddd; line-height: 1.8; margin-bottom: 35px; }
+
+        .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        
+        .btn-main { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 10px; transition: 0.4s; }
+        .btn-discord { background: var(--primary-blue); color: white; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
+        .btn-rules { background: transparent; color: white; border: 2px solid white; }
+
+        .btn-main:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .btn-rules:hover { background: white; color: black; }
+
+        /* قسم الصيانة المشترك */
+        .maintenance-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed #555;
+            padding: 80px 40px;
+            border-radius: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .maintenance-card i { font-size: 55px; color: var(--primary-blue); margin-bottom: 20px; opacity: 0.8; }
+        .maintenance-card.red i { color: var(--error-red); }
+        .maintenance-card.red { border-color: var(--error-red); }
+
         /* قسم التفعيل (الاختبار) */
         .quiz-container {
             background: rgba(255, 255, 255, 0.05);
@@ -64,51 +93,12 @@
 
         .question { margin-bottom: 30px; display: none; animation: fadeIn 0.5s; }
         .question.active { display: block; }
-        .question h3 { margin-bottom: 20px; font-size: 20px; color: var(--light-blue); }
-
-        .options { display: flex; flex-direction: column; gap: 10px; }
-        .option {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
+        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .option { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
         .option:hover { background: rgba(0, 123, 255, 0.2); border-color: var(--primary-blue); }
         .option.selected { background: var(--primary-blue); color: white; }
 
-        .quiz-footer { margin-top: 30px; display: flex; justify-content: space-between; align-items: center; }
-        .btn {
-            padding: 10px 25px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .btn-next { background: var(--primary-blue); color: white; }
-        .btn-submit { background: var(--success-green); color: white; display: none; }
-
-        /* قسم الإدارة (صيانة) */
-        .staff-maintenance {
-            text-align: center;
-            background: rgba(255, 0, 0, 0.05);
-            border: 2px dashed var(--error-red);
-            padding: 60px;
-            border-radius: 20px;
-        }
-        .staff-maintenance i { font-size: 60px; color: var(--error-red); margin-bottom: 20px; }
-
-        /* التنسيقات العامة */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero img { width: 180px; filter: drop-shadow(0 0 20px var(--primary-blue)); margin-bottom: 20px; }
-        .discord-btn { background: var(--primary-blue); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
-
         #result-area { text-align: center; display: none; }
-        .success-msg { color: var(--success-green); font-size: 24px; font-weight: bold; }
-        .fail-msg { color: var(--error-red); font-size: 24px; font-weight: bold; }
-
         footer { background: rgba(0, 0, 0, 0.8); padding: 30px; text-align: center; border-top: 2px solid var(--primary-blue); margin-top: 50px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -125,17 +115,35 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#rules">القوانين</a></li>
             <li><a href="#activation">اختبار التفعيل</a></li>
             <li><a href="#staff">قسم الإدارة</a></li>
-            <li><a href="#maintenance">الصيانة</a></li>
         </ul>
     </nav>
 
     <section id="home" class="hero">
         <img src="https://i.imgur.com/5BkALp7.png" alt="Logo">
-        <h1>ريوت <span>سايد</span></h1>
-        <p>مرحباً بك في اختبار التفعيل الإلكتروني لسيرفر ريوت سايد. أجب على الأسئلة بدقة للانتقال للمرحلة التالية.</p>
-        <a href="#activation" class="discord-btn">ابدأ الاختبار الآن</a>
+        <h1>سيرفر <span>ريوت سايد</span> الرسمي</h1>
+        <p>
+            مرحباً بكم في مجتمع ريوت سايد، الوجهة الأولى لمحبي الحياة الواقعية (Roleplay). نحن نسعى لتقديم بيئة لعب متوازنة واحترافية تجمع بين الإثارة والواقعية، من خلال أنظمة اقتصادية متطورة، طاقم إداري متفاعل، وسكربتات حصرية صُممت لتمنحك تجربة لا تُنسى. سواء كنت ترغب في الانضمام لصفوف القانون أو بناء إمبراطوريتك الخاصة، مكانك هنا.
+        </p>
+        <div class="hero-btns">
+            <a href="https://discord.gg/YWFY5g4bY" target="_blank" class="btn-main btn-discord">
+                <i class="fab fa-discord"></i> دخول سيرفرنا ريوت سايد
+            </a>
+            <a href="#rules" class="btn-main btn-rules">
+                <i class="fas fa-book"></i> القوانين والأنظمة
+            </a>
+        </div>
+    </section>
+
+    <section id="rules">
+        <h2 class="section-title">قوانين السيرفر</h2>
+        <div class="maintenance-card">
+            <i class="fas fa-tools"></i>
+            <h2 style="margin-bottom: 15px;">قسم القوانين قيد التحديث</h2>
+            <p style="color: #ccc; font-size: 18px;">نعمل حالياً على صياغة دستور جديد للسيرفر لضمان أفضل تجربة لعب. سيتم نشر القوانين هنا فور اعتمادها من قبل الإدارة العليا.</p>
+        </div>
     </section>
 
     <section id="activation">
@@ -160,51 +168,24 @@
                 </div>
             </div>
 
-            <div class="question" data-correct="3">
-                <h3>3. ما هو الـ (Meta Gaming)؟</h3>
-                <div class="options">
-                    <div class="option" onclick="selectOption(this, 1)">التحدث بكلمات خارج اللعبة (OOC)</div>
-                    <div class="option" onclick="selectOption(this, 2)">سرقة سيارة شرطة بدون إذن</div>
-                    <div class="option" onclick="selectOption(this, 3)">استخدام معلومات عرفتها خارج اللعبة (مثل البثوث) داخل اللعبة</div>
-                </div>
-            </div>
-
-            <div class="question" data-correct="1">
-                <h3>4. ماذا تفعل إذا وجه شخص سلاحه نحوك وقال لك "ارفع يدك"؟</h3>
-                <div class="options">
-                    <div class="option" onclick="selectOption(this, 1)">الخضوع للأوامر (Fear RP) لأن حياتك في خطر</div>
-                    <div class="option" onclick="selectOption(this, 2)">سحب سلاحك ومحاولة قتله بسرعة</div>
-                    <div class="option" onclick="selectOption(this, 3)">الجري بعيداً والاتصال بالشرطة</div>
-                </div>
-            </div>
-
             <div id="result-area">
                 <div id="result-msg"></div>
                 <div id="result-actions"></div>
             </div>
 
-            <div class="quiz-footer" id="quiz-controls">
-                <span id="progress">سؤال 1 من 4</span>
-                <button class="btn btn-next" onclick="nextQuestion()">السؤال التالي</button>
-                <button class="btn btn-submit" onclick="showResults()">عرض النتيجة</button>
+            <div class="quiz-footer" id="quiz-controls" style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+                <span id="progress">سؤال 1 من 2</span>
+                <button style="padding: 10px 25px; background: var(--primary-blue); border:none; color:white; font-weight:bold; cursor:pointer;" onclick="nextQuestion()">التالي</button>
             </div>
         </div>
     </section>
 
     <section id="staff">
         <h2 class="section-title">طاقم الإدارة</h2>
-        <div class="staff-maintenance">
-            <i class="fas fa-tools"></i>
-            <h2 style="color: var(--error-red); margin-bottom: 10px;">القسم تحت الصيانة</h2>
-            <p style="color: #ccc;">نحن نقوم بتحديث قائمة الإدارة حالياً، سيتم توفير القسم قريباً.</p>
-        </div>
-    </section>
-
-    <section id="maintenance">
-        <h2 class="section-title">حالة الصيانة</h2>
-        <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; text-align: center; border-right: 5px solid var(--primary-blue);">
-            <h3>حالة السيرفر: <span style="color: var(--success-green);">يعمل بكفاءة</span></h3>
-            <p style="margin-top: 10px;">لا توجد أعمال صيانة عامة حالياً.</p>
+        <div class="maintenance-card red">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2 style="color: var(--error-red); margin-bottom: 15px;">القسم مغلق للصيانة</h2>
+            <p style="color: #ccc;">يتم حالياً إعادة هيكلة الطاقم الإداري وتحديث القائمة. شكراً لتفهمكم.</p>
         </div>
     </section>
 
@@ -216,7 +197,6 @@
         let currentStep = 0;
         let score = 0;
         const questions = document.querySelectorAll('.question');
-        const totalQuestions = questions.length;
 
         function selectOption(el, index) {
             const currentQuestion = questions[currentStep];
@@ -228,45 +208,32 @@
         function nextQuestion() {
             const currentQuestion = questions[currentStep];
             if (!currentQuestion.dataset.userAnswer) {
-                alert("يرجى اختيار إجابة أولاً!");
+                alert("يرجى اختيار إجابة!");
                 return;
             }
+
+            if (currentQuestion.dataset.userAnswer == currentQuestion.dataset.correct) score++;
 
             currentQuestion.classList.remove('active');
             currentStep++;
 
-            if (currentStep < totalQuestions) {
+            if (currentStep < questions.length) {
                 questions[currentStep].classList.add('active');
-                document.getElementById('progress').innerText = `سؤال ${currentStep + 1} من ${totalQuestions}`;
-                if (currentStep === totalQuestions - 1) {
-                    document.querySelector('.btn-next').style.display = 'none';
-                    document.querySelector('.btn-submit').style.display = 'block';
-                }
+                document.getElementById('progress').innerText = `سؤال ${currentStep + 1} من ${questions.length}`;
+            } else {
+                showResults();
             }
         }
 
         function showResults() {
-            questions.forEach(q => {
-                if (q.dataset.userAnswer == q.dataset.correct) {
-                    score++;
-                }
-            });
-
             document.getElementById('quiz-controls').style.display = 'none';
-            questions[currentStep].classList.remove('active');
             const resultArea = document.getElementById('result-area');
-            const resultMsg = document.getElementById('result-msg');
-            const resultActions = document.getElementById('result-actions');
             resultArea.style.display = 'block';
-
-            if (score >= 3) { // نسبة النجاح 75% فأكثر
-                resultMsg.innerHTML = `<p class="success-msg">مبروك! لقد اجتزت الاختبار بنجاح (${score}/${totalQuestions})</p>
-                <p style="margin-top:10px;">توجه الآن للديسكورد لاستلام رتبتك وإكمال التفعيل الصوتي.</p>`;
-                resultActions.innerHTML = `<a href="https://discord.gg/YWFY5g4bY" class="discord-btn">تسليم الرتبة في الديسكورد</a>`;
+            
+            if (score >= 2) {
+                resultArea.innerHTML = `<h3 style="color:var(--success-green)">ناجح! (${score}/2)</h3><p>توجه للديسكورد لاستلام الرتبة.</p><a href="https://discord.gg/YWFY5g4bY" class="btn-main btn-discord" style="margin:20px auto; width:fit-content;">دخول الديسكورد</a>`;
             } else {
-                resultMsg.innerHTML = `<p class="fail-msg">للأسف لم تجتز الاختبار (${score}/${totalQuestions})</p>
-                <p style="margin-top:10px;">يجب عليك مراجعة قوانين الرول بلاي والمحاولة مرة أخرى.</p>`;
-                resultActions.innerHTML = `<button class="btn btn-next" onclick="location.reload()" style="margin-top:20px;">إعادة المحاولة</button>`;
+                resultArea.innerHTML = `<h3 style="color:var(--error-red)">راسب (${score}/2)</h3><button onclick="location.reload()" style="padding:10px; margin-top:10px;">إعادة المحاولة</button>`;
             }
         }
     </script>

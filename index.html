@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot Side | ريوت سايد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --light-blue: #e3f2fd;
+            --dark-blue: #0056b3;
+            --white: #ffffff;
+            --text-gray: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+
+        body {
+            background-color: #000;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* الخلفية */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 20, 50, 0.7), rgba(0, 0, 0, 0.9)), url('https://i.imgur.com/Bku822J.jpeg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        /* شريط التنقل */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-area img { width: 50px; border-radius: 50%; border: 2px solid var(--primary-blue); }
+        .logo-area span { font-weight: 900; font-size: 22px; color: var(--white); }
+
+        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        /* القسم الرئيسي */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero img {
+            width: 180px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px var(--primary-blue));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero h1 { font-size: clamp(40px, 8vw, 80px); font-weight: 900; color: var(--white); margin-bottom: 10px; }
+        .hero h1 span { color: var(--primary-blue); }
+        .hero p { max-width: 700px; font-size: 18px; color: var(--light-blue); line-height: 1.6; margin-bottom: 30px; }
+
+        .discord-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.4s;
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .discord-btn:hover {
+            transform: scale(1.1);
+            background: var(--white);
+            color: var(--primary-blue);
+            box-shadow: 0 0 30px var(--white);
+        }
+
+        /* الأقسام العامة */
+        section { padding: 100px 10% 50px; min-height: 60vh; }
+        .section-title { font-size: 35px; margin-bottom: 50px; text-align: center; color: var(--primary-blue); }
+
+        /* بطاقات القوانين والمميزات */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .card:hover { background: rgba(0, 123, 255, 0.1); border-color: var(--primary-blue); transform: translateY(-10px); }
+        .card i { font-size: 40px; color: var(--primary-blue); margin-bottom: 20px; }
+        .card h3 { margin-bottom: 15px; color: var(--white); }
+        .card p { color: #ccc; font-size: 15px; }
+
+        /* قسم الصيانة */
+        .maintenance-status {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border-right: 5px solid var(--primary-blue);
+        }
+        .status-dot { height: 12px; width: 12px; background: #28a745; border-radius: 50%; display: inline-block; margin-left: 10px; animation: pulse 1.5s infinite; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* حقوق الملكية */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            text-align: center;
+            border-top: 2px solid var(--primary-blue);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; }
+            .nav-links { gap: 10px; font-size: 13px; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+
+    <nav>
+        <div class="logo-area">
+            <img src="https://i.imgur.com/5BkALp7.png" alt="Riot Side Logo">
+            <span>RIOT SIDE</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#rules">القوانين</a></li>
+            <li><a href="#activation">التفعيل</a></li>
+            <li><a href="#staff">الإدارة</a></li>
+            <li><a href="#maintenance">الصيانة</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <img src="https://i.imgur.com/5BkALp7.png" alt="Logo">
+        <h1>ريوت <span>سايد</span></h1>
+        <p>مرحباً بك في عالم الواقعية اللامحدود. سيرفر ريوت سايد يقدم لك تجربة حياة واقعية فريدة من نوعها مع مجتمع متفاعل وأنظمة متطورة تضمن لك المتعة والإثارة.</p>
+        <a href="https://discord.gg/YWFY5g4bY" target="_blank" class="discord-btn">
+            <i class="fab fa-discord"></i> دخول سيرفرنا ريوت سايد
+        </a>
+    </section>
+
+    <section id="rules">
+        <h2 class="section-title">قوانين السيرفر</h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fas fa-gavel"></i>
+                <h3>الاحترام المتبادل</h3>
+                <p>يمنع السب أو القذف أو الإساءة لأي عضو في المجتمع مهما كان السبب.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-user-shield"></i>
+                <h3>الحياة الواقعية</h3>
+                <p>يجب الالتزام بقواعد الـ Roleplay وتمثيل الشخصية بشكل واقعي تماماً.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-ban"></i>
+                <h3>الغش والهاك</h3>
+                <p>استخدام أي برامج خارجية أو استغلال الثغرات يعرضك للباند النهائي فوراً.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <h2 class="section-title">لماذا ريوت سايد؟</h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fas fa-bolt"></i>
+                <h3>أداء عالٍ</h3>
+                <p>سكربتات مطورة خصيصاً لضمان سلاسة اللعب بدون "لاق".</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-car"></i>
+                <h3>سيارات حصرية</h3>
+                <p>مجموعة واسعة من السيارات الواقعية والمعدلة بلمسات ريوت سايد.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-briefcase"></i>
+                <h3>وظائف متنوعة</h3>
+                <p>من الشرطة والإسعاف إلى التجارة والمقاولات، اختر مسارك المهني.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="activation">
+        <h2 class="section-title">التفعيل والإدارة</h2>
+        <div class="grid-container">
+            <div class="card" style="border-color: #fff;">
+                <i class="fas fa-id-card" style="color: #fff;"></i>
+                <h3>نظام التفعيل</h3>
+                <p>للحصول على التفعيل، توجه للديسكورد وقدم طلب المقابلة في الروم المخصص.</p>
+            </div>
+            <div class="card" style="border-color: #fff;">
+                <i class="fas fa-users-cog" style="color: #fff;"></i>
+                <h3>الطاقم الإداري</h3>
+                <p>إدارة ريوت سايد متواجدة على مدار الساعة لخدمتكم وضمان نظام السيرفر.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="maintenance">
+        <h2 class="section-title">حالة الصيانة</h2>
+        <div class="maintenance-status">
+            <h3>حالة السيرفر الآن: <span style="color: #28a745;">يعمل بكفاءة</span> <div class="status-dot"></div></h3>
+            <p style="margin-top: 15px;">لا توجد أعمال صيانة مجدولة في الوقت الحالي. استمتع باللعب!</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2024 لـ <strong>ريوت سايد - Riot Side</strong></p>
+        <p style="font-size: 12px; color: #777; margin-top: 5px;">تم التصميم بكل حب لمجتمعنا الرهيب</p>
+    </footer>
+
+</body>
+</html>
+

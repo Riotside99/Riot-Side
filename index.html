@@ -14,7 +14,6 @@
             --white: #ffffff;
             --error-red: #ff4444;
             --success-green: #28a745;
-            --discord-blurple: #5865F2;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
@@ -27,13 +26,6 @@
             background: linear-gradient(rgba(0, 20, 50, 0.75), rgba(0, 0, 0, 0.95)), url('https://i.imgur.com/Bku822J.jpeg') no-repeat center center;
             background-size: cover;
             z-index: -1;
-        }
-
-        /* حاوية تسجيل الدخول الإجبارية */
-        #auth-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 9999;
-            display: flex; justify-content: center; align-items: center; text-align: center;
         }
 
         nav {
@@ -56,32 +48,10 @@
         .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
         .nav-links a:hover { color: var(--primary-blue); }
 
-        /* قائمة بيانات المستخدم الجانبية */
-        #user-panel {
-            position: fixed; top: 100px; left: 20px; width: 280px;
-            background: rgba(0, 0, 0, 0.85); border: 2px solid var(--primary-blue);
-            border-radius: 15px; padding: 20px; z-index: 1100;
-            transition: all 0.4s ease; backdrop-filter: blur(10px);
-        }
-        #user-panel.minimized { width: 60px; height: 60px; padding: 10px; overflow: hidden; }
-        .panel-toggle { cursor: pointer; color: var(--primary-blue); margin-bottom: 10px; display: block; text-align: left; }
-        .user-content { text-align: center; }
-        .user-content img { width: 80px; border-radius: 50%; border: 3px solid var(--primary-blue); margin-bottom: 10px; }
-        .user-content h4 { color: var(--white); margin-bottom: 5px; }
-        .user-content span { font-size: 14px; color: var(--light-blue); background: rgba(0,123,255,0.2); padding: 2px 10px; border-radius: 10px; }
-
-        /* القوانين المنسدلة */
-        .accordion-container { max-width: 900px; margin: 0 auto; text-align: right; }
-        .accordion-item { background: rgba(255,255,255,0.05); border: 1px solid #333; margin-bottom: 10px; border-radius: 8px; overflow: hidden; }
-        .accordion-header { padding: 15px 20px; background: rgba(0, 123, 255, 0.1); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; transition: 0.3s; }
-        .accordion-header:hover { background: rgba(0, 123, 255, 0.2); }
-        .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; color: #ccc; line-height: 1.8; }
-        .accordion-item.active .accordion-content { padding: 20px; max-height: 1000px; border-top: 1px solid #333; }
-
-        /* الأقسام العامة */
         section { padding: 100px 10% 50px; min-height: 80vh; }
         .section-title { font-size: 35px; margin-bottom: 50px; text-align: center; color: var(--primary-blue); text-shadow: 0 0 15px rgba(0,123,255,0.4); }
 
+        /* الصفحة الرئيسية المعدلة */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .hero img { width: 160px; filter: drop-shadow(0 0 20px var(--primary-blue)); margin-bottom: 25px; }
         .hero h1 { font-size: clamp(35px, 6vw, 70px); font-weight: 900; margin-bottom: 15px; }
@@ -89,16 +59,38 @@
         .hero p { max-width: 850px; font-size: 19px; color: #ddd; line-height: 1.8; margin-bottom: 35px; }
 
         .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .btn-main { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 10px; transition: 0.4s; cursor: pointer; border: none; }
+        
+        .btn-main { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 10px; transition: 0.4s; }
         .btn-discord { background: var(--primary-blue); color: white; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
         .btn-rules { background: transparent; color: white; border: 2px solid white; }
+
         .btn-main:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .btn-rules:hover { background: white; color: black; }
 
-        /* صيانة */
-        .maintenance-card { text-align: center; background: rgba(255, 255, 255, 0.03); border: 2px dashed #555; padding: 80px 40px; border-radius: 25px; max-width: 800px; margin: 0 auto; }
-        .maintenance-card.red i { color: var(--error-red); font-size: 55px; margin-bottom: 20px; }
+        /* قسم الصيانة المشترك */
+        .maintenance-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed #555;
+            padding: 80px 40px;
+            border-radius: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .maintenance-card i { font-size: 55px; color: var(--primary-blue); margin-bottom: 20px; opacity: 0.8; }
+        .maintenance-card.red i { color: var(--error-red); }
+        .maintenance-card.red { border-color: var(--error-red); }
 
-        .quiz-container { background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; border: 1px solid var(--primary-blue); max-width: 800px; margin: 0 auto; }
+        /* قسم التفعيل (الاختبار) */
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-blue);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .question { margin-bottom: 30px; display: none; animation: fadeIn 0.5s; }
         .question.active { display: block; }
         .options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
@@ -108,34 +100,13 @@
 
         #result-area { text-align: center; display: none; }
         footer { background: rgba(0, 0, 0, 0.8); padding: 30px; text-align: center; border-top: 2px solid var(--primary-blue); margin-top: 50px; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body onload="checkLogin()">
-
-    <div id="auth-overlay">
-        <div style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 20px; border: 1px solid var(--primary-blue); width: 90%; max-width: 500px;">
-            <img src="https://i.imgur.com/5BkALp7.png" width="100" style="margin-bottom: 20px;">
-            <h2>تسجيل الدخول المطلوب</h2>
-            <p style="margin: 20px 0; color: #ccc;">يجب عليك تسجيل الدخول عبر حساب الديسكورد للوصول إلى موقع ريوت سايد.</p>
-            <a href="/login" class="btn-main btn-discord" style="width: 100%; justify-content: center; background: var(--discord-blurple); text-decoration: none;">
-                <i class="fab fa-discord"></i> تسجيل الدخول بالديسكورد
-            </a>
-        </div>
-    </div>
+<body>
 
     <div class="bg-overlay"></div>
-
-    <div id="user-panel" style="display: none;">
-        <span class="panel-toggle" onclick="toggleUserPanel()"><i class="fas fa-compress-alt" id="panel-icon"></i></span>
-        <div class="user-content" id="user-content-body">
-            <img id="p-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
-            <h4 id="p-username">RiotSide_Player</h4>
-            <p id="p-id" style="font-size: 12px; color: #888; margin-bottom: 10px;">@ID_LOADING</p>
-            <span>رتبة: لاعب معتمد</span>
-            <button onclick="logout()" style="margin-top: 15px; background: none; border: 1px solid #ff4444; color: #ff4444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">تسجيل خروج</button>
-        </div>
-    </div>
 
     <nav>
         <div class="logo-area">
@@ -153,7 +124,9 @@
     <section id="home" class="hero">
         <img src="https://i.imgur.com/5BkALp7.png" alt="Logo">
         <h1>سيرفر <span>ريوت سايد</span> الرسمي</h1>
-        <p>مرحباً بكم في مجتمع ريوت سايد، الوجهة الأولى لمحبي الحياة الواقعية (Roleplay). نحن نسعى لتقديم بيئة لعب متوازنة واحترافية تجمع بين الإثارة والواقعية.</p>
+        <p>
+            مرحباً بكم في مجتمع ريوت سايد، الوجهة الأولى لمحبي الحياة الواقعية (Roleplay). نحن نسعى لتقديم بيئة لعب متوازنة واحترافية تجمع بين الإثارة والواقعية، من خلال أنظمة اقتصادية متطورة، طاقم إداري متفاعل، وسكربتات حصرية صُممت لتمنحك تجربة لا تُنسى. سواء كنت ترغب في الانضمام لصفوف القانون أو بناء إمبراطوريتك الخاصة، مكانك هنا.
+        </p>
         <div class="hero-btns">
             <a href="https://discord.gg/YWFY5g4bY" target="_blank" class="btn-main btn-discord">
                 <i class="fab fa-discord"></i> دخول سيرفرنا ريوت سايد
@@ -165,42 +138,18 @@
     </section>
 
     <section id="rules">
-        <h2 class="section-title">قوانين ريوت سايد الشاملة</h2>
-        
-        <div class="accordion-container">
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    قوانين مجتمع الديسكورد العامة
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <strong>1. الاحترام المتبادل:</strong> يمنع منعاً باتاً التلفظ بألفاظ خارجة، السب، القذف، أو التنمر على أي عضو مهما كانت رتبته.<br>
-                    <strong>2. الخصوصية:</strong> يمنع نشر أي بيانات شخصية لأي عضو، وهذا يعرضك للطرد النهائي.<br>
-                    <strong>3. الإعلانات والروابط:</strong> يمنع الترويج لسيرفرات أخرى أو خدمات خارجية.<br>
-                    <strong>4. الأسماء:</strong> يجب أن يكون اسمك لائقاً ولا يحتوي على إيحاءات.<br>
-                    <strong>5. المنشن:</strong> يمنع المنشن العشوائي للإدارة دون سبب حقيقي.
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    قوانين الرول بلاي - أساسيات الحياة الواقعية
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <strong>1. الالتزام بالشخصية:</strong> يجب البقاء داخل الشخصية طوال الوقت ومنع كلام (OOC).<br>
-                    <strong>2. قيمة الحياة (Fear RP):</strong> يجب تمثيل الخوف على حياتك عند تعرضك للتهديد.<br>
-                    <strong>3. القتل العشوائي (RDM):</strong> يمنع قتل أي لاعب دون سبب درامي واضح.<br>
-                    <strong>4. الصدم العشوائي (VDM):</strong> يمنع استخدام السيارة كأداة قتل.<br>
-                    <strong>5. الهروب (Combat Log):</strong> يمنع تسجيل الخروج أثناء السيناريوهات النشطة.
-                </div>
-            </div>
+        <h2 class="section-title">قوانين السيرفر</h2>
+        <div class="maintenance-card">
+            <i class="fas fa-tools"></i>
+            <h2 style="margin-bottom: 15px;">قسم القوانين قيد التحديث</h2>
+            <p style="color: #ccc; font-size: 18px;">نعمل حالياً على صياغة دستور جديد للسيرفر لضمان أفضل تجربة لعب. سيتم نشر القوانين هنا فور اعتمادها من قبل الإدارة العليا.</p>
         </div>
     </section>
 
     <section id="activation">
         <h2 class="section-title">نموذج التفعيل الإلكتروني</h2>
         <div class="quiz-container" id="quiz-box">
+            
             <div class="question active" data-correct="2">
                 <h3>1. ماذا يعني مصطلح (RDM) في الرول بلاي؟</h3>
                 <div class="options">
@@ -209,6 +158,7 @@
                     <div class="option" onclick="selectOption(this, 3)">الخروج من السيرفر وقت السيناريو</div>
                 </div>
             </div>
+
             <div class="question" data-correct="1">
                 <h3>2. إذا تعرضت لحادث سيارة قوي، ماذا يجب أن تفعل؟</h3>
                 <div class="options">
@@ -217,11 +167,25 @@
                     <div class="option" onclick="selectOption(this, 3)">الاستمرار في القيادة وكأن شيئاً لم يكن</div>
                 </div>
             </div>
-            <div id="result-area"></div>
+
+            <div id="result-area">
+                <div id="result-msg"></div>
+                <div id="result-actions"></div>
+            </div>
+
             <div class="quiz-footer" id="quiz-controls" style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
                 <span id="progress">سؤال 1 من 2</span>
                 <button style="padding: 10px 25px; background: var(--primary-blue); border:none; color:white; font-weight:bold; cursor:pointer;" onclick="nextQuestion()">التالي</button>
             </div>
+        </div>
+    </section>
+
+    <section id="staff">
+        <h2 class="section-title">طاقم الإدارة</h2>
+        <div class="maintenance-card red">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2 style="color: var(--error-red); margin-bottom: 15px;">القسم مغلق للصيانة</h2>
+            <p style="color: #ccc;">يتم حالياً إعادة هيكلة الطاقم الإداري وتحديث القائمة. شكراً لتفهمكم.</p>
         </div>
     </section>
 
@@ -230,73 +194,49 @@
     </footer>
 
     <script>
-        // وظيفة التحقق من تسجيل الدخول الحقيقي
-        function checkLogin() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name');
-            const avatar = urlParams.get('avatar');
-            const id = urlParams.get('id');
-
-            if (name && id) {
-                // حفظ البيانات في المتصفح
-                localStorage.setItem('rs_user', JSON.stringify({ name, avatar, id }));
-                // مسح الرابط للتجميل
-                window.history.replaceState({}, document.title, "/");
-            }
-
-            const savedUser = JSON.parse(localStorage.getItem('rs_user'));
-            if (savedUser) {
-                document.getElementById('auth-overlay').style.display = 'none';
-                document.getElementById('user-panel').style.display = 'block';
-                document.getElementById('p-username').innerText = savedUser.name;
-                document.getElementById('p-id').innerText = `@${savedUser.id}`;
-                if(savedUser.avatar) {
-                    document.getElementById('p-avatar').src = `https://cdn.discordapp.com/avatars/${savedUser.id}/${savedUser.avatar}.png`;
-                }
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('rs_user');
-            location.reload();
-        }
-
-        function toggleUserPanel() {
-            const panel = document.getElementById('user-panel');
-            const icon = document.getElementById('panel-icon');
-            const content = document.getElementById('user-content-body');
-            panel.classList.toggle('minimized');
-            icon.className = panel.classList.contains('minimized') ? 'fas fa-expand-alt' : 'fas fa-compress-alt';
-            content.style.display = panel.classList.contains('minimized') ? 'none' : 'block';
-        }
-
-        function toggleAccordion(header) { header.parentElement.classList.toggle('active'); }
-
-        let currentStep = 0; let score = 0;
+        let currentStep = 0;
+        let score = 0;
         const questions = document.querySelectorAll('.question');
+
         function selectOption(el, index) {
-            questions[currentStep].querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            const currentQuestion = questions[currentStep];
+            currentQuestion.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
             el.classList.add('selected');
-            questions[currentStep].dataset.userAnswer = index;
+            el.parentElement.parentElement.dataset.userAnswer = index;
         }
+
         function nextQuestion() {
-            const currentQ = questions[currentStep];
-            if (!currentQ.dataset.userAnswer) { alert("يرجى اختيار إجابة!"); return; }
-            if (currentQ.dataset.userAnswer == currentQ.dataset.correct) score++;
-            currentQ.classList.remove('active');
+            const currentQuestion = questions[currentStep];
+            if (!currentQuestion.dataset.userAnswer) {
+                alert("يرجى اختيار إجابة!");
+                return;
+            }
+
+            if (currentQuestion.dataset.userAnswer == currentQuestion.dataset.correct) score++;
+
+            currentQuestion.classList.remove('active');
             currentStep++;
+
             if (currentStep < questions.length) {
                 questions[currentStep].classList.add('active');
                 document.getElementById('progress').innerText = `سؤال ${currentStep + 1} من ${questions.length}`;
-            } else { showResults(); }
+            } else {
+                showResults();
+            }
         }
+
         function showResults() {
             document.getElementById('quiz-controls').style.display = 'none';
-            const area = document.getElementById('result-area');
-            area.style.display = 'block';
-            area.innerHTML = score >= 2 ? `<h3 style="color:var(--success-green)">ناجح! (${score}/2)</h3><a href="https://discord.gg/YWFY5g4bY" class="btn-main btn-discord" style="margin:20px auto; width:fit-content;">دخول الديسكورد</a>` : `<h3 style="color:var(--error-red)">راسب (${score}/2)</h3><button onclick="location.reload()" style="padding:10px; margin-top:10px;">إعادة</button>`;
+            const resultArea = document.getElementById('result-area');
+            resultArea.style.display = 'block';
+            
+            if (score >= 2) {
+                resultArea.innerHTML = `<h3 style="color:var(--success-green)">ناجح! (${score}/2)</h3><p>توجه للديسكورد لاستلام الرتبة.</p><a href="https://discord.gg/YWFY5g4bY" class="btn-main btn-discord" style="margin:20px auto; width:fit-content;">دخول الديسكورد</a>`;
+            } else {
+                resultArea.innerHTML = `<h3 style="color:var(--error-red)">راسب (${score}/2)</h3><button onclick="location.reload()" style="padding:10px; margin-top:10px;">إعادة المحاولة</button>`;
+            }
         }
     </script>
+
 </body>
 </html>
- 

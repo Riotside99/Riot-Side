@@ -47,9 +47,38 @@
         .logo-area img { width: 50px; border-radius: 50%; border: 2px solid var(--primary-blue); }
         .logo-area span { font-weight: 900; font-size: 22px; color: var(--white); }
 
-        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
         .nav-links a:hover { color: var(--primary-blue); }
+
+        /* ستايل زر الثلاث نقاط والقائمة */
+        .more-menu { position: relative; display: flex; align-items: center; }
+        .dots-btn { background: none; border: none; color: var(--white); font-size: 20px; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
+        .dots-btn:hover { color: var(--primary-blue); }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            border: 1px solid var(--primary-blue);
+            border-radius: 8px;
+            z-index: 1100;
+            overflow: hidden;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .dropdown-content a:hover { background: var(--primary-blue); }
+        .show { display: block; }
 
         section { padding: 120px 10% 50px; min-height: 80vh; }
         .section-title { font-size: 35px; margin-bottom: 30px; text-align: center; color: var(--primary-blue); text-shadow: 0 0 15px rgba(0,123,255,0.4); }
@@ -130,9 +159,17 @@
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
             <li><a href="#rules">القوانين</a></li>
-            <li><a href="#activation">اختبار التفعيل</a></li>
-            <li><a href="#founders">المؤسسين</a></li>
-            <li><a href="#staff">قسم الإدارة</a></li>
+            <li class="more-menu">
+                <button class="dots-btn" onclick="toggleMenu()"><i class="fas fa-ellipsis-h"></i></button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#home" onclick="closeMenu()">الرئيسية</a>
+                    <a href="#rules" onclick="closeMenu()">القوانين</a>
+                    <a href="#activation" onclick="closeMenu()">اختبار التفعيل</a>
+                    <a href="#store" onclick="closeMenu()">المتجر</a>
+                    <a href="#founders" onclick="closeMenu()">المؤسسين</a>
+                    <a href="#staff" onclick="closeMenu()">قسم الإدارة</a>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -155,42 +192,52 @@
         <div class="rules-wrapper">
             <div class="rules-category">
                 <div class="category-header">قوانين الرول بلاي (RP Rules)</div>
-                <details><summary>Metagaming</summary><div class="details-content">استخدام معلومات خارج الرول داخل اللعب.</div></details>
-                <details><summary>Powergaming</summary><div class="details-content">إجبار لاعب على فعل شيء غير منطقي أو مستحيل.</div></details>
-                <details><summary>Fail RP</summary><div class="details-content">عدم الالتزام بالواقعية أو تخريب السيناريو.</div></details>
-                <details><summary>RDM</summary><div class="details-content">القتل العشوائي بدون سبب واضح داخل الرول.</div></details>
-                <details><summary>VDM</summary><div class="details-content">الدهس بالمركبة بدون سبب منطقي.</div></details>
-                <details><summary>New Life Rule (NLR)</summary><div class="details-content">نسيان كل ما حدث بعد الموت وعدم الانتقام.</div></details>
-                <details><summary>Combat Logging</summary><div class="details-content">الهروب من الرول عن طريق الخروج من السيرفر.</div></details>
-                <details><summary>OOC Toxic</summary><div class="details-content">السب أو الإساءة خارج الرول.</div></details>
-                <details><summary>Exploiting</summary><div class="details-content">استغلال الثغرات أو أخطاء السيرفر.</div></details>
-                <details><summary>Fear RP</summary><div class="details-content">عدم الخوف من السلاح أو تجاهل التهديد.</div></details>
-                <details><summary>Revenge Kill</summary><div class="details-content">الرجوع للانتقام بعد الموت.</div></details>
-                <details><summary>Random Robbery</summary><div class="details-content">سرقة اللاعبين بدون سيناريو واضح.</div></details>
-                <details><summary>Cop Baiting</summary><div class="details-content">استفزاز الشرطة بدون سبب.</div></details>
-                <details><summary>Value of Life</summary><div class="details-content">الحفاظ على حياتك والتصرف بواقعية.</div></details>
-                <details><summary>Safe Zone Abuse</summary><div class="details-content">استغلال المناطق الآمنة للهروب أو التخريب.</div></details>
-                <details><summary>Spam</summary><div class="details-content">الإزعاج أو التكرار داخل الرول أو الشات.</div></details>
-                <details><summary>Bug Abuse</summary><div class="details-content">استغلال أخطاء اللعبة لمصلحتك.</div></details>
-                <details><summary>Breaking Character</summary><div class="details-content">الخروج من الشخصية أثناء الرول.</div></details>
-                <details><summary>Force RP</summary><div class="details-content">فرض سيناريو على لاعب بدون إعطائه فرصة للتفاعل.</div></details>
-                <details><summary>Third Party</summary><div class="details-content">التدخل في سيناريو بدون سبب أو علاقة.</div></details>
+                <details><summary>Metagaming</summary><div class="details-content">استخدام معلومات خارج الرول داخل اللعب</div></details>
+                <details><summary>Powergaming</summary><div class="details-content">إجبار لاعب على فعل شيء غير منطقي أو مستحيل</div></details>
+                <details><summary>Fail RP</summary><div class="details-content">عدم الالتزام بالواقعية أو تخريب السيناريو</div></details>
+                <details><summary>RDM</summary><div class="details-content">القتل العشوائي بدون سبب واضح داخل الرول</div></details>
+                <details><summary>VDM</summary><div class="details-content">الدهس بالمركبة بدون سبب</div></details>
+                <details><summary>New Life Rule (NLR)</summary><div class="details-content">نسيان كل ما حدث بعد الموت وعدم الانتقام</div></details>
+                <details><summary>Combat Logging</summary><div class="details-content">الهروب من الرول عن طريق الخروج من السيرفر</div></details>
+                <details><summary>OOC Toxic</summary><div class="details-content">السب أو الإساءة خارج الرول</div></details>
+                <details><summary>Exploiting</summary><div class="details-content">استغلال الثغرات أو أخطاء السيرفر</div></details>
+                <details><summary>Fear RP</summary><div class="details-content">عدم الخوف من السلاح أو تجاهل التهديد</div></details>
+                <details><summary>Revenge Kill</summary><div class="details-content">الرجوع للانتقام بعد الموت</div></details>
+                <details><summary>Random Robbery</summary><div class="details-content">سرقة اللاعبين بدون سيناريو واضح</div></details>
+                <details><summary>Cop Baiting</summary><div class="details-content">استفزاز الشرطة بدون سبب</div></details>
+                <details><summary>Value of Life</summary><div class="details-content">الحفاظ على حياتك والتصرف بواقعية</div></details>
+                <details><summary>Safe Zone Abuse</summary><div class="details-content">استغلال المناطق الآمنة للهروب أو التخريب</div></details>
+                <details><summary>Spam</summary><div class="details-content">الإزعاج أو التكرار داخل الرول أو الشات</div></details>
+                <details><summary>Bug Abuse</summary><div class="details-content">استغلال أخطاء اللعبة لمصلحتك</div></details>
+                <details><summary>Breaking Character</summary><div class="details-content">الخروج من الشخصية أثناء الرول</div></details>
+                <details><summary>Force RP</summary><div class="details-content">فرض سيناريو على لاعب بدون إعطائه فرصة يتفاعل</div></details>
+                <details><summary>Third Party</summary><div class="details-content">التدخل في سيناريو بدون سبب أو علاقة</div></details>
             </div>
 
             <div class="rules-category">
-                <div class="category-header">قوانين ديسكورد (Discord Rules)</div>
+                <div class="category-header">Discord Server Rules</div>
                 <ul class="simple-list">
-                    <li>احترام جميع الأعضاء وعدم السب أو الإهانة.</li>
-                    <li>يمنع العنصرية أو الطائفية أو أي كلام مسيء.</li>
-                    <li>يمنع نشر محتوى غير لائق أو مخالف للآداب.</li>
-                    <li>يمنع السبام أو الإزعاج المتكرر في الشات.</li>
-                    <li>يمنع إرسال روابط سيرفرات أو إعلانات بدون إذن.</li>
-                    <li>يمنع التهديد أو الابتزاز بأي شكل.</li>
-                    <li>يمنع نشر معلومات شخصية (خصوصية).</li>
-                    <li>يمنع التخريب داخل الرومات أو إفساد جو السيرفر.</li>
-                    <li>يمنع استخدام أسماء أو صور غير لائقة.</li>
+                    <li>احترام جميع الأعضاء وعدم السب أو الإهانة</li>
+                    <li>يمنع العنصرية أو الطائفية أو أي كلام مسيء</li>
+                    <li>يمنع نشر محتوى غير لائق أو +18</li>
+                    <li>يمنع السبام أو الإزعاج المتكرر في الشات</li>
+                    <li>يمنع إرسال روابط سيرفرات أو إعلانات بدون إذن</li>
+                    <li>يمنع التهديد أو الابتزاز بأي شكل</li>
+                    <li>يمنع نشر معلومات شخصية (خصوصية)</li>
+                    <li>يمنع التخريب داخل الرومات أو إفساد جو السيرفر</li>
+                    <li>يمنع استخدام أسماء أو صور غير لائقة</li>
                 </ul>
             </div>
+        </div>
+    </section>
+
+    <section id="store">
+        <h2 class="section-title">متجر ريوت سايد</h2>
+        <div style="text-align:center; padding:60px 20px; border:2px dashed var(--primary-blue); border-radius:30px; background: rgba(0,0,0,0.5);">
+            <i class="fas fa-tools" style="font-size:70px; color:var(--primary-blue); margin-bottom:25px;"></i>
+            <h3 style="font-size:30px; margin-bottom:15px;">المتجر تحت الصيانة</h3>
+            <p style="font-size:20px; color:#ccc;">المطور <span style="color:var(--purple-accent); font-weight:bold;">الهاجس</span> جالس يشتغل على المتجر حالياً لتوفير أفضل تجربة لكم.</p>
+            <p style="margin-top:10px; color:var(--primary-blue);">قريباً سيتم افتتاح المتجر بأفضل العروض!</p>
         </div>
     </section>
 
@@ -212,9 +259,9 @@
         <div class="terms-card" id="terms-box">
             <h1 class="terms-header">الشروط العامة</h1>
             <ul class="terms-list">
-                <li>يجب أن يكون عمرك 13 سنة أو أكثر ليتم تفعيلك.</li>
+                <li>يجب أن يكون عمرك 13 سنة أو أكثر لتتفعل.</li>
                 <li>ممنوع استخدام أي شخصية افتراضية إلا من خلال المتجر فقط.</li>
-                <li>ممنوع كتابة اسمك باللغة الإنجليزية أو برموز أو تشكيل أو اسم شخصية مشهورة.</li>
+                <li>ممنوع كتابة أسمك باللغة الإنجليزية أو برموز أو تشكيل أو يكون اسم شخصيه مشهوره.</li>
                 <li>يمنع الدخول من أجهزة غير جهازك الشخصي.</li>
                 <li>يحق لك امتلاك شخصيتين فقط.</li>
             </ul>
@@ -238,7 +285,7 @@
             <label class="q-label">اسم الشخصية:</label><input type="text" class="q-input" id="char-name">
             <label class="q-label">عمر الشخصية:</label><input type="number" class="q-input" id="char-age">
             <label class="q-label">يوزرك في روبلوكس:</label><input type="text" class="q-input" id="roblox-user">
-            <label class="q-label">ما هي قصة الشخصية؟</label><textarea class="q-input" rows="3" id="char-story"></textarea>
+            <label class="q-label">ماهي قصة الشخصية؟</label><textarea class="q-input" rows="3" id="char-story"></textarea>
             
             <label class="q-label">سيناريو سائق الأجرة: اتصل بك شخصان، أحدهما يدفع $13 لمشوار قصير والآخر لمشوار بعيد لمنطقة مشبوهة، ماذا تختار ولماذا؟</label>
             <textarea class="q-input" rows="4" id="scenario"></textarea>
@@ -260,6 +307,21 @@
     </footer>
 
     <script>
+        /* كود القائمة المنسدلة */
+        function toggleMenu() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function closeMenu() {
+            document.getElementById("myDropdown").classList.remove("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dots-btn') && !event.target.matches('.fa-ellipsis-h')) {
+                closeMenu();
+            }
+        }
+
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1487461444600729670/WpeDGmceBuQZgQye5ts7a0CuzJu7r3cdrHXbKiRi_mYJ0PMtXOAkkEXy1zNGo7SfxHD3';
 
         async function sendToDiscord() {
@@ -281,7 +343,7 @@
             }
 
             if (parseInt(data.realAge) < 13) {
-                alert('نعتذر، يجب أن يكون العمر 13 سنة أو أكثر ليتم تفعيلك.');
+                alert('نعتذر، يجب أن يكون العمر 13 سنة أو أكثر لتتفعل.');
                 return;
             }
 

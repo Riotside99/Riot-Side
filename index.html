@@ -47,9 +47,38 @@
         .logo-area img { width: 50px; border-radius: 50%; border: 2px solid var(--primary-blue); }
         .logo-area span { font-weight: 900; font-size: 22px; color: var(--white); }
 
-        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
         .nav-links a:hover { color: var(--primary-blue); }
+
+        /* ستايل زر الثلاث نقاط والقائمة */
+        .more-menu { position: relative; display: flex; align-items: center; }
+        .dots-btn { background: none; border: none; color: var(--white); font-size: 20px; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
+        .dots-btn:hover { color: var(--primary-blue); }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            border: 1px solid var(--primary-blue);
+            border-radius: 8px;
+            z-index: 1100;
+            overflow: hidden;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .dropdown-content a:hover { background: var(--primary-blue); }
+        .show { display: block; }
 
         section { padding: 120px 10% 50px; min-height: 80vh; }
         .section-title { font-size: 35px; margin-bottom: 30px; text-align: center; color: var(--primary-blue); text-shadow: 0 0 15px rgba(0,123,255,0.4); }
@@ -130,9 +159,17 @@
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
             <li><a href="#rules">القوانين</a></li>
-            <li><a href="#activation">اختبار التفعيل</a></li>
-            <li><a href="#founders">المؤسسين</a></li>
-            <li><a href="#staff">قسم الإدارة</a></li>
+            <li class="more-menu">
+                <button class="dots-btn" onclick="toggleMenu()"><i class="fas fa-ellipsis-h"></i></button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#home" onclick="closeMenu()">الرئيسية</a>
+                    <a href="#rules" onclick="closeMenu()">القوانين</a>
+                    <a href="#activation" onclick="closeMenu()">اختبار التفعيل</a>
+                    <a href="#store" onclick="closeMenu()">المتجر</a>
+                    <a href="#founders" onclick="closeMenu()">المؤسسين</a>
+                    <a href="#staff" onclick="closeMenu()">قسم الإدارة</a>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -191,6 +228,16 @@
                     <li>يمنع استخدام أسماء أو صور غير لائقة</li>
                 </ul>
             </div>
+        </div>
+    </section>
+
+    <section id="store">
+        <h2 class="section-title">متجر ريوت سايد</h2>
+        <div style="text-align:center; padding:60px 20px; border:2px dashed var(--primary-blue); border-radius:30px; background: rgba(0,0,0,0.5);">
+            <i class="fas fa-tools" style="font-size:70px; color:var(--primary-blue); margin-bottom:25px;"></i>
+            <h3 style="font-size:30px; margin-bottom:15px;">المتجر تحت الصيانة</h3>
+            <p style="font-size:20px; color:#ccc;">المطور <span style="color:var(--purple-accent); font-weight:bold;">الهاجس</span> جالس يشتغل على المتجر حالياً لتوفير أفضل تجربة لكم.</p>
+            <p style="margin-top:10px; color:var(--primary-blue);">قريباً سيتم افتتاح المتجر بأفضل العروض!</p>
         </div>
     </section>
 
@@ -260,6 +307,21 @@
     </footer>
 
     <script>
+        /* كود القائمة المنسدلة */
+        function toggleMenu() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function closeMenu() {
+            document.getElementById("myDropdown").classList.remove("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dots-btn') && !event.target.matches('.fa-ellipsis-h')) {
+                closeMenu();
+            }
+        }
+
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1487461444600729670/WpeDGmceBuQZgQye5ts7a0CuzJu7r3cdrHXbKiRi_mYJ0PMtXOAkkEXy1zNGo7SfxHD3';
 
         async function sendToDiscord() {
@@ -357,4 +419,3 @@
     </script>
 </body>
 </html>
- 

@@ -232,6 +232,7 @@
             <h3 style="text-align:center; color:var(--primary-blue); margin-bottom:25px;">بيانات المواطن الجديد</h3>
             <label class="q-label">الاسم الكامل:</label><input type="text" class="q-input" id="real-name">
             <label class="q-label">العمر الحقيقي:</label><input type="number" class="q-input" id="real-age">
+            <label class="q-label">يوزرك في ديسكورد:</label><input type="text" class="q-input" id="discord-user">
             <label class="q-label">اسم الشخصية:</label><input type="text" class="q-input" id="char-name">
             <label class="q-label">عمر الشخصية:</label><input type="number" class="q-input" id="char-age">
             <label class="q-label">يوزرك في روبلوكس:</label><input type="text" class="q-input" id="roblox-user">
@@ -267,6 +268,7 @@
             const data = {
                 realName: document.getElementById('real-name').value,
                 realAge: document.getElementById('real-age').value,
+                discordUser: document.getElementById('discord-user').value,
                 charName: document.getElementById('char-name').value,
                 charAge: document.getElementById('char-age').value,
                 robloxUser: document.getElementById('roblox-user').value,
@@ -274,9 +276,9 @@
                 scenario: document.getElementById('scenario').value
             };
 
-            // التحقق من تعبئة جميع الحقول
-            if (!data.realName || !data.robloxUser || !data.charName || !data.charStory || !data.scenario) {
-                alert('يرجى تعبئة جميع الحقول قبل الإرسال.');
+            // التحقق من تعبئة الحقول الأساسية
+            if (!data.realName || !data.discordUser || !data.robloxUser || !data.charName) {
+                alert('يرجى تعبئة الحقول الأساسية (الاسم، يوزر ديسكورد، يوزر روبلوكس، اسم الشخصية) قبل الإرسال.');
                 return;
             }
 
@@ -290,15 +292,16 @@
                 avatar_url: "https://i.imgur.com/5BkALp7.png",
                 embeds: [{
                     title: "📝 طلب تفعيل جديد",
-                    color: 3447003, // اللون الأزرق
+                    color: 3447003,
                     fields: [
                         { name: "👤 الاسم الحقيقي", value: data.realName, inline: true },
-                        { name: "🎂 العمر", value: data.realAge, inline: true },
+                        { name: "🎂 العمر", value: data.realAge || "غير محدد", inline: true },
+                        { name: "🆔 يوزر ديسكورد", value: data.discordUser, inline: true },
                         { name: "🎮 يوزر روبلوكس", value: data.robloxUser, inline: true },
                         { name: "🎭 اسم الشخصية", value: data.charName, inline: true },
-                        { name: "⏳ عمر الشخصية", value: data.charAge, inline: true },
-                        { name: "📜 قصة الشخصية", value: "```" + data.charStory + "```" },
-                        { name: "🚕 سيناريو سائق الأجرة", value: "```" + data.scenario + "```" }
+                        { name: "⏳ عمر الشخصية", value: data.charAge || "غير محدد", inline: true },
+                        { name: "📜 قصة الشخصية", value: "```" + (data.charStory || "لا توجد") + "```" },
+                        { name: "🚕 سيناريو سائق الأجرة", value: "```" + (data.scenario || "لا توجد إجابة") + "```" }
                     ],
                     footer: { text: "Riot Side Roleplay | " + new Date().toLocaleString('ar-EG') },
                     timestamp: new Date()
@@ -314,12 +317,12 @@
 
                 if (response.ok) {
                     alert('✅ تم إرسال طلبك بنجاح! سيتم مراجعته من قبل الإدارة.');
-                    location.reload(); // إعادة تحميل الصفحة لتصفير الحقول
+                    location.reload();
                 } else {
                     throw new Error('فشل الإرسال');
                 }
             } catch (error) {
-                alert('❌ حدث خطأ أثناء الإرسال. تأكد من اتصالك بالإنترنت وحاول مجدداً.');
+                alert('❌ حدث خطأ أثناء الإرسال. تأكد من اتصالك بالإنترنت.');
                 submitBtn.disabled = false;
                 submitBtn.innerText = "إرسال الطلب";
             }

@@ -211,6 +211,7 @@
         <div class="terms-card" id="terms-box">
             <h1 class="terms-header">الشروط العامة</h1>
             <ul class="terms-list">
+                <li>يجب أن يكون عمرك 13 سنة أو أكثر للانضمام.</li>
                 <li>ممنوع استخدام أي شخصية افتراضية إلا من خلال المتجر فقط.</li>
                 <li>ممنوع كتابة أسمك باللغة الإنجليزية أو برموز أو تشكيل أو يكون اسم شخصيه مشهوره.</li>
                 <li>يمنع الدخول من أجهزة غير جهازك الشخصي.</li>
@@ -258,13 +259,10 @@
     </footer>
 
     <script>
-        // رابط الويب هوك الخاص بك
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1487461444600729670/WpeDGmceBuQZgQye5ts7a0CuzJu7r3cdrHXbKiRi_mYJ0PMtXOAkkEXy1zNGo7SfxHD3';
 
         async function sendToDiscord() {
             const submitBtn = document.getElementById('submit-btn');
-            
-            // جمع البيانات
             const data = {
                 realName: document.getElementById('real-name').value,
                 realAge: document.getElementById('real-age').value,
@@ -276,17 +274,19 @@
                 scenario: document.getElementById('scenario').value
             };
 
-            // التحقق من تعبئة الحقول الأساسية
-            if (!data.realName || !data.discordUser || !data.robloxUser || !data.charName) {
-                alert('يرجى تعبئة الحقول الأساسية (الاسم، يوزر ديسكورد، يوزر روبلوكس، اسم الشخصية) قبل الإرسال.');
+            if (!data.realName || !data.discordUser || !data.robloxUser || !data.charName || !data.realAge) {
+                alert('يرجى تعبئة الحقول الأساسية قبل الإرسال.');
                 return;
             }
 
-            // تعطيل الزر أثناء الإرسال
+            if (parseInt(data.realAge) < 13) {
+                alert('نعتذر، يجب أن يكون العمر 13 سنة أو أكثر للانضمام للسيرفر.');
+                return;
+            }
+
             submitBtn.disabled = true;
             submitBtn.innerText = "جاري الإرسال...";
 
-            // تجهيز رسالة الـ Embed للديسكورد
             const embedMessage = {
                 username: "نظام التفعيل - ريوت سايد",
                 avatar_url: "https://i.imgur.com/5BkALp7.png",
@@ -295,7 +295,7 @@
                     color: 3447003,
                     fields: [
                         { name: "👤 الاسم الحقيقي", value: data.realName, inline: true },
-                        { name: "🎂 العمر", value: data.realAge || "غير محدد", inline: true },
+                        { name: "🎂 العمر", value: data.realAge, inline: true },
                         { name: "🆔 يوزر ديسكورد", value: data.discordUser, inline: true },
                         { name: "🎮 يوزر روبلوكس", value: data.robloxUser, inline: true },
                         { name: "🎭 اسم الشخصية", value: data.charName, inline: true },
@@ -322,7 +322,7 @@
                     throw new Error('فشل الإرسال');
                 }
             } catch (error) {
-                alert('❌ حدث خطأ أثناء الإرسال. تأكد من اتصالك بالإنترنت.');
+                alert('❌ حدث خطأ أثناء الإرسال.');
                 submitBtn.disabled = false;
                 submitBtn.innerText = "إرسال الطلب";
             }
@@ -356,4 +356,3 @@
     </script>
 </body>
 </html>
- 

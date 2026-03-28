@@ -3,7 +3,7 @@ const axios = require('axios');
 const path = require('path');
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // التأكد من سحب المتغيرات من Railway
 const CLIENT_ID = process.env.CLIENT_ID;

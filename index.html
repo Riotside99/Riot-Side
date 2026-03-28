@@ -111,29 +111,29 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
+<body onload="checkLogin()">
 
     <div id="auth-overlay">
         <div style="background: rgba(255,255,255,0.05); padding: 50px; border-radius: 20px; border: 1px solid var(--primary-blue); width: 90%; max-width: 500px;">
             <img src="https://i.imgur.com/5BkALp7.png" width="100" style="margin-bottom: 20px;">
             <h2>تسجيل الدخول المطلوب</h2>
             <p style="margin: 20px 0; color: #ccc;">يجب عليك تسجيل الدخول عبر حساب الديسكورد للوصول إلى موقع ريوت سايد.</p>
-            <button onclick="loginWithDiscord()" class="btn-main btn-discord" style="width: 100%; justify-content: center; background: var(--discord-blurple);">
+            <a href="/login" class="btn-main btn-discord" style="width: 100%; justify-content: center; background: var(--discord-blurple); text-decoration: none;">
                 <i class="fab fa-discord"></i> تسجيل الدخول بالديسكورد
-            </button>
+            </a>
         </div>
     </div>
 
     <div class="bg-overlay"></div>
 
     <div id="user-panel" style="display: none;">
-        <span class="panel-toggle" onclick="toggleUserPanel()"><i class="fas fa-expand-alt" id="panel-icon"></i></span>
+        <span class="panel-toggle" onclick="toggleUserPanel()"><i class="fas fa-compress-alt" id="panel-icon"></i></span>
         <div class="user-content" id="user-content-body">
-            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
-            <h4 id="user-display-name">RiotSide_Player</h4>
-            <p style="font-size: 12px; color: #888; margin-bottom: 10px;">@RiotUser2026</p>
+            <img id="p-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+            <h4 id="p-username">RiotSide_Player</h4>
+            <p id="p-id" style="font-size: 12px; color: #888; margin-bottom: 10px;">@ID_LOADING</p>
             <span>رتبة: لاعب معتمد</span>
-            <button onclick="location.reload()" style="margin-top: 15px; background: none; border: 1px solid #ff4444; color: #ff4444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">تسجيل خروج</button>
+            <button onclick="logout()" style="margin-top: 15px; background: none; border: 1px solid #ff4444; color: #ff4444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">تسجيل خروج</button>
         </div>
     </div>
 
@@ -174,11 +174,11 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="accordion-content">
-                    <strong>1. الاحترام المتبادل:</strong> يمنع منعاً باتاً التلفظ بألفاظ خارجة، السب، القذف، أو التنمر على أي عضو مهما كانت رتبته. التعامل بالاحترام هو أساس مجتمعنا.<br>
-                    <strong>2. الخصوصية:</strong> يمنع نشر أي بيانات شخصية (Doxing) لأي عضو في السيرفر دون موافقة صريحة منه، وهذا يعرضك للطرد النهائي.<br>
-                    <strong>3. الإعلانات والروابط:</strong> يمنع نشر روابط لسيرفرات ديسكورد أخرى أو الترويج لأي منتجات أو خدمات خارجية في القنوات العامة أو الخاص للأعضاء.<br>
-                    <strong>4. الأسماء والملفات الشخصية:</strong> يجب أن يكون اسمك في الديسكورد لائقاً ولا يحتوي على إيحاءات، كما يمنع استخدام صور ملف شخصي خادشة للحياء.<br>
-                    <strong>5. إزعاج الإدارة:</strong> يمنع المنشن العشوائي للإدارة (Tag Spam) دون وجود مشكلة حقيقية تستدعي ذلك.
+                    <strong>1. الاحترام المتبادل:</strong> يمنع منعاً باتاً التلفظ بألفاظ خارجة، السب، القذف، أو التنمر على أي عضو مهما كانت رتبته.<br>
+                    <strong>2. الخصوصية:</strong> يمنع نشر أي بيانات شخصية لأي عضو، وهذا يعرضك للطرد النهائي.<br>
+                    <strong>3. الإعلانات والروابط:</strong> يمنع الترويج لسيرفرات أخرى أو خدمات خارجية.<br>
+                    <strong>4. الأسماء:</strong> يجب أن يكون اسمك لائقاً ولا يحتوي على إيحاءات.<br>
+                    <strong>5. المنشن:</strong> يمنع المنشن العشوائي للإدارة دون سبب حقيقي.
                 </div>
             </div>
 
@@ -188,30 +188,13 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="accordion-content">
-                    <strong>1. الالتزام بالشخصية (Roleplay):</strong> يجب عليك البقاء داخل نطاق شخصيتك في جميع الأوقات. يمنع التحدث عن أمور خارج اللعبة (OOC) داخل الشات الصوتي للعبة.<br>
-                    <strong>2. قيمة الحياة (Fear RP):</strong> يجب أن تمثل الخوف على حياتك كما في الواقع. إذا وُجه نحوك سلاح من قبل شخصين أو أكثر، لا يسمح لك بالمقاومة أو الهروب بل يجب الخضوع للأوامر.<br>
-                    <strong>3. القتل العشوائي (RDM):</strong> يمنع قتل أي شخص دون وجود سبب درامي أو سيناريو مسبق أدى إلى ذلك. القتل العشوائي يعتبر من أشد المخالفات.<br>
-                    <strong>4. الصدم العشوائي (VDM):</strong> يمنع استخدام سيارتك كأداة للقتل أو صدم اللاعبين بشكل متعمد وعشوائي.<br>
-                    <strong>5. الخروج وقت السيناريو (Combat Log):</strong> يمنع إغلاق اللعبة أو تسجيل الخروج أثناء وجودك في سيناريو (مطاردة، سرقة، تحقيق) لتجنب العواقب.
+                    <strong>1. الالتزام بالشخصية:</strong> يجب البقاء داخل الشخصية طوال الوقت ومنع كلام (OOC).<br>
+                    <strong>2. قيمة الحياة (Fear RP):</strong> يجب تمثيل الخوف على حياتك عند تعرضك للتهديد.<br>
+                    <strong>3. القتل العشوائي (RDM):</strong> يمنع قتل أي لاعب دون سبب درامي واضح.<br>
+                    <strong>4. الصدم العشوائي (VDM):</strong> يمنع استخدام السيارة كأداة قتل.<br>
+                    <strong>5. الهروب (Combat Log):</strong> يمنع تسجيل الخروج أثناء السيناريوهات النشطة.
                 </div>
             </div>
-
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    قوانين الرول بلاي - الجرائم والسيناريوهات
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <strong>1. سيناريو الخطف:</strong> يجب أن يكون هناك سبب قوي للخطف، ويمنع خطف الموظفين الحكوميين (شرطة، إسعاف) إلا بوجود عدد كافٍ منهم في الخدمة.<br>
-                    <strong>2. الميتا جيمنج (Meta Gaming):</strong> يمنع استخدام أي معلومات حصلت عليها خارج اللعبة (من الديسكورد أو البثوث) واستخدامها داخل اللعبة لمصلحة شخصيتك.<br>
-                    <strong>3. الباور جيمنج (Power Gaming):</strong> يمنع القيام بأفعال غير واقعية لا يمكن للجسد البشري القيام بها، مثل القفز بالسيارة من فوق جبال شاهقة أو التحدث وأنت مغمى عليك.<br>
-                    <strong>4. المناطق الآمنة (Green Zones):</strong> يمنع القيام بأي أعمال إجرامية داخل المناطق المحددة كـ "مناطق آمنة" مثل مراكز الشرطة والمستشفيات.
-                </div>
-            </div>
-        </div>
-
-        <div class="maintenance-card" style="margin-top: 30px;">
-            <p style="color: var(--primary-blue);"><i class="fas fa-info-circle"></i> قوانين السيرفر الداخلية التفصيلية قيد التحديث المستمر.</p>
         </div>
     </section>
 
@@ -234,23 +217,11 @@
                     <div class="option" onclick="selectOption(this, 3)">الاستمرار في القيادة وكأن شيئاً لم يكن</div>
                 </div>
             </div>
-            <div id="result-area">
-                <div id="result-msg"></div>
-                <div id="result-actions"></div>
-            </div>
+            <div id="result-area"></div>
             <div class="quiz-footer" id="quiz-controls" style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
                 <span id="progress">سؤال 1 من 2</span>
                 <button style="padding: 10px 25px; background: var(--primary-blue); border:none; color:white; font-weight:bold; cursor:pointer;" onclick="nextQuestion()">التالي</button>
             </div>
-        </div>
-    </section>
-
-    <section id="staff">
-        <h2 class="section-title">طاقم الإدارة</h2>
-        <div class="maintenance-card red">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h2 style="color: var(--error-red); margin-bottom: 15px;">القسم مغلق للصيانة</h2>
-            <p style="color: #ccc;">يتم حالياً إعادة هيكلة الطاقم الإداري وتحديث القائمة.</p>
         </div>
     </section>
 
@@ -259,75 +230,71 @@
     </footer>
 
     <script>
-        // وظائف تسجيل الدخول
-        function loginWithDiscord() {
-            document.getElementById('auth-overlay').style.display = 'none';
-            document.getElementById('user-panel').style.display = 'block';
-            alert("أهلاً بك في ريوت سايد! تم محاكاة تسجيل دخولك بنجاح.");
+        // وظيفة التحقق من تسجيل الدخول الحقيقي
+        function checkLogin() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            const avatar = urlParams.get('avatar');
+            const id = urlParams.get('id');
+
+            if (name && id) {
+                // حفظ البيانات في المتصفح
+                localStorage.setItem('rs_user', JSON.stringify({ name, avatar, id }));
+                // مسح الرابط للتجميل
+                window.history.replaceState({}, document.title, "/");
+            }
+
+            const savedUser = JSON.parse(localStorage.getItem('rs_user'));
+            if (savedUser) {
+                document.getElementById('auth-overlay').style.display = 'none';
+                document.getElementById('user-panel').style.display = 'block';
+                document.getElementById('p-username').innerText = savedUser.name;
+                document.getElementById('p-id').innerText = `@${savedUser.id}`;
+                if(savedUser.avatar) {
+                    document.getElementById('p-avatar').src = `https://cdn.discordapp.com/avatars/${savedUser.id}/${savedUser.avatar}.png`;
+                }
+            }
         }
 
-        // تصغير وتكبير قائمة المستخدم
+        function logout() {
+            localStorage.removeItem('rs_user');
+            location.reload();
+        }
+
         function toggleUserPanel() {
             const panel = document.getElementById('user-panel');
             const icon = document.getElementById('panel-icon');
             const content = document.getElementById('user-content-body');
-            
             panel.classList.toggle('minimized');
-            if(panel.classList.contains('minimized')) {
-                icon.className = 'fas fa-expand-alt';
-                content.style.opacity = '0';
-                setTimeout(() => content.style.display = 'none', 400);
-            } else {
-                icon.className = 'fas fa-compress-alt';
-                content.style.display = 'block';
-                setTimeout(() => content.style.opacity = '1', 50);
-            }
+            icon.className = panel.classList.contains('minimized') ? 'fas fa-expand-alt' : 'fas fa-compress-alt';
+            content.style.display = panel.classList.contains('minimized') ? 'none' : 'block';
         }
 
-        // القوائم المنسدلة
-        function toggleAccordion(header) {
-            const item = header.parentElement;
-            item.classList.toggle('active');
-        }
+        function toggleAccordion(header) { header.parentElement.classList.toggle('active'); }
 
-        // منطق الاختبار
-        let currentStep = 0;
-        let score = 0;
+        let currentStep = 0; let score = 0;
         const questions = document.querySelectorAll('.question');
-
         function selectOption(el, index) {
-            const currentQuestion = questions[currentStep];
-            currentQuestion.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            questions[currentStep].querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
             el.classList.add('selected');
-            el.parentElement.parentElement.dataset.userAnswer = index;
+            questions[currentStep].dataset.userAnswer = index;
         }
-
         function nextQuestion() {
-            const currentQuestion = questions[currentStep];
-            if (!currentQuestion.dataset.userAnswer) {
-                alert("يرجى اختيار إجابة!");
-                return;
-            }
-            if (currentQuestion.dataset.userAnswer == currentQuestion.dataset.correct) score++;
-            currentQuestion.classList.remove('active');
+            const currentQ = questions[currentStep];
+            if (!currentQ.dataset.userAnswer) { alert("يرجى اختيار إجابة!"); return; }
+            if (currentQ.dataset.userAnswer == currentQ.dataset.correct) score++;
+            currentQ.classList.remove('active');
             currentStep++;
             if (currentStep < questions.length) {
                 questions[currentStep].classList.add('active');
                 document.getElementById('progress').innerText = `سؤال ${currentStep + 1} من ${questions.length}`;
-            } else {
-                showResults();
-            }
+            } else { showResults(); }
         }
-
         function showResults() {
             document.getElementById('quiz-controls').style.display = 'none';
-            const resultArea = document.getElementById('result-area');
-            resultArea.style.display = 'block';
-            if (score >= 2) {
-                resultArea.innerHTML = `<h3 style="color:var(--success-green)">ناجح! (${score}/2)</h3><p>توجه للديسكورد لاستلام الرتبة.</p><a href="https://discord.gg/YWFY5g4bY" class="btn-main btn-discord" style="margin:20px auto; width:fit-content;">دخول الديسكورد</a>`;
-            } else {
-                resultArea.innerHTML = `<h3 style="color:var(--error-red)">راسب (${score}/2)</h3><button onclick="location.reload()" style="padding:10px; margin-top:10px;">إعادة المحاولة</button>`;
-            }
+            const area = document.getElementById('result-area');
+            area.style.display = 'block';
+            area.innerHTML = score >= 2 ? `<h3 style="color:var(--success-green)">ناجح! (${score}/2)</h3><a href="https://discord.gg/YWFY5g4bY" class="btn-main btn-discord" style="margin:20px auto; width:fit-content;">دخول الديسكورد</a>` : `<h3 style="color:var(--error-red)">راسب (${score}/2)</h3><button onclick="location.reload()" style="padding:10px; margin-top:10px;">إعادة</button>`;
         }
     </script>
 </body>

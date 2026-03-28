@@ -14,10 +14,11 @@
             --white: #ffffff;
             --error-red: #ff4444;
             --success-green: #28a745;
+            --bg-dark: #0f0a24; /* لون خلفية الشروط من الصورة */
+            --purple-text: #b388ff; /* لون عنوان الشروط */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
-
         body { background-color: #000; color: var(--white); overflow-x: hidden; }
 
         .bg-overlay {
@@ -48,60 +49,93 @@
         .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
         .nav-links a:hover { color: var(--primary-blue); }
 
-        section { padding: 100px 10% 50px; min-height: 80vh; }
+        section { padding: 120px 10% 80px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         .section-title { font-size: 35px; margin-bottom: 50px; text-align: center; color: var(--primary-blue); text-shadow: 0 0 15px rgba(0,123,255,0.4); }
 
-        /* الصفحة الرئيسية المعدلة */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        /* تصميم قسم الشروط من الصورة */
+        .terms-container {
+            background-color: var(--bg-dark);
+            padding: 60px 40px;
+            border-radius: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: right;
+        }
+
+        .terms-title {
+            color: var(--purple-text);
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 40px;
+        }
+
+        .terms-list { list-style: none; }
+        .terms-list li {
+            font-size: 20px;
+            color: #d1d1d1;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .terms-list li::before {
+            content: "■";
+            color: var(--purple-text);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* أزرار الموافقة والرفض */
+        .terms-actions {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .action-item:hover { transform: scale(1.05); }
+
+        .icon-box {
+            width: 180px;
+            height: 180px;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .icon-check { background-color: #2ecc71; }
+        .icon-cross { background-color: #e74c3c; }
+
+        .action-text { font-size: 18px; font-weight: bold; color: #a1a1a1; }
+
+        /* حالة التعطيل للمؤقت */
+        .disabled {
+            pointer-events: none;
+            filter: grayscale(1);
+            opacity: 0.6;
+        }
+
+        .hero { text-align: center; }
         .hero img { width: 160px; filter: drop-shadow(0 0 20px var(--primary-blue)); margin-bottom: 25px; }
         .hero h1 { font-size: clamp(35px, 6vw, 70px); font-weight: 900; margin-bottom: 15px; }
         .hero h1 span { color: var(--primary-blue); }
         .hero p { max-width: 850px; font-size: 19px; color: #ddd; line-height: 1.8; margin-bottom: 35px; }
 
-        .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        
-        .btn-main { padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 10px; transition: 0.4s; }
-        .btn-discord { background: var(--primary-blue); color: white; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
-        .btn-rules { background: transparent; color: white; border: 2px solid white; }
-
-        .btn-main:hover { transform: translateY(-5px); filter: brightness(1.2); }
-        .btn-rules:hover { background: white; color: black; }
-
-        /* قسم الصيانة المشترك */
-        .maintenance-card {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px dashed #555;
-            padding: 80px 40px;
-            border-radius: 25px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .maintenance-card i { font-size: 55px; color: var(--primary-blue); margin-bottom: 20px; opacity: 0.8; }
-        .maintenance-card.red i { color: var(--error-red); }
-        .maintenance-card.red { border-color: var(--error-red); }
-
-        /* قسم التفعيل (الاختبار) */
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--primary-blue);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .question { margin-bottom: 30px; display: none; animation: fadeIn 0.5s; }
-        .question.active { display: block; }
-        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .option { background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
-        .option:hover { background: rgba(0, 123, 255, 0.2); border-color: var(--primary-blue); }
-        .option.selected { background: var(--primary-blue); color: white; }
-
-        #result-area { text-align: center; display: none; }
-        footer { background: rgba(0, 0, 0, 0.8); padding: 30px; text-align: center; border-top: 2px solid var(--primary-blue); margin-top: 50px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        footer { background: rgba(0, 0, 0, 0.8); padding: 30px; text-align: center; border-top: 2px solid var(--primary-blue); }
     </style>
 </head>
 <body>
@@ -115,8 +149,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#rules">القوانين</a></li>
-            <li><a href="#activation">اختبار التفعيل</a></li>
+            <li><a href="#terms">الشروط العامة</a></li>
             <li><a href="#staff">قسم الإدارة</a></li>
         </ul>
     </nav>
@@ -124,68 +157,42 @@
     <section id="home" class="hero">
         <img src="https://i.imgur.com/5BkALp7.png" alt="Logo">
         <h1>سيرفر <span>ريوت سايد</span> الرسمي</h1>
-        <p>
-            مرحباً بكم في مجتمع ريوت سايد، الوجهة الأولى لمحبي الحياة الواقعية (Roleplay). نحن نسعى لتقديم بيئة لعب متوازنة واحترافية تجمع بين الإثارة والواقعية، من خلال أنظمة اقتصادية متطورة، طاقم إداري متفاعل، وسكربتات حصرية صُممت لتمنحك تجربة لا تُنسى. سواء كنت ترغب في الانضمام لصفوف القانون أو بناء إمبراطوريتك الخاصة، مكانك هنا.
-        </p>
-        <div class="hero-btns">
-            <a href="https://discord.gg/YWFY5g4bY" target="_blank" class="btn-main btn-discord">
-                <i class="fab fa-discord"></i> دخول سيرفرنا ريوت سايد
-            </a>
-            <a href="#rules" class="btn-main btn-rules">
-                <i class="fas fa-book"></i> القوانين والأنظمة
-            </a>
-        </div>
+        <p>مرحباً بكم في مجتمع ريوت سايد، الوجهة الأولى لمحبي الحياة الواقعية.</p>
     </section>
 
-    <section id="rules">
-        <h2 class="section-title">قوانين السيرفر</h2>
-        <div class="maintenance-card">
-            <i class="fas fa-tools"></i>
-            <h2 style="margin-bottom: 15px;">قسم القوانين قيد التحديث</h2>
-            <p style="color: #ccc; font-size: 18px;">نعمل حالياً على صياغة دستور جديد للسيرفر لضمان أفضل تجربة لعب. سيتم نشر القوانين هنا فور اعتمادها من قبل الإدارة العليا.</p>
-        </div>
-    </section>
+    <section id="terms">
+        <div class="terms-container">
+            <h2 class="terms-title">الشروط العامة</h2>
+            <ul class="terms-list">
+                <li>ممنوع استخدام أي شخصية افتراضية إلا من خلال المتجر فقط.</li>
+                <li>ممنوع كتابة أسمك باللغة الإنجليزية أو برموز أو تشكيل أو يكون اسم شخصيه مشهوره.</li>
+                <li>يمنع الدخول من أجهزة غير جهازك الشخصي.</li>
+                <li>يحق لك امتلاك شخصيتين فقط.</li>
+            </ul>
 
-    <section id="activation">
-        <h2 class="section-title">نموذج التفعيل الإلكتروني</h2>
-        <div class="quiz-container" id="quiz-box">
-            
-            <div class="question active" data-correct="2">
-                <h3>1. ماذا يعني مصطلح (RDM) في الرول بلاي؟</h3>
-                <div class="options">
-                    <div class="option" onclick="selectOption(this, 1)">قتل شخص باستخدام سيارة</div>
-                    <div class="option" onclick="selectOption(this, 2)">قتل شخص عشوائياً بدون سبب درامي</div>
-                    <div class="option" onclick="selectOption(this, 3)">الخروج من السيرفر وقت السيناريو</div>
+            <div class="terms-actions" id="actions-wrapper">
+                <div class="action-item" id="btn-decline" onclick="startTimer()">
+                    <div class="icon-box icon-cross">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <span class="action-text" id="decline-text">غير موافق على الشروط</span>
                 </div>
-            </div>
 
-            <div class="question" data-correct="1">
-                <h3>2. إذا تعرضت لحادث سيارة قوي، ماذا يجب أن تفعل؟</h3>
-                <div class="options">
-                    <div class="option" onclick="selectOption(this, 1)">تمثيل الألم وعدم الحركة فوراً حتى يأتي الإسعاف</div>
-                    <div class="option" onclick="selectOption(this, 2)">إصلاح السيارة بالسكربت والهروب سريعاً</div>
-                    <div class="option" onclick="selectOption(this, 3)">الاستمرار في القيادة وكأن شيئاً لم يكن</div>
+                <div class="action-item" id="btn-accept" onclick="acceptTerms()">
+                    <div class="icon-box icon-check">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="action-text">الموافقة على الشروط</span>
                 </div>
-            </div>
-
-            <div id="result-area">
-                <div id="result-msg"></div>
-                <div id="result-actions"></div>
-            </div>
-
-            <div class="quiz-footer" id="quiz-controls" style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
-                <span id="progress">سؤال 1 من 2</span>
-                <button style="padding: 10px 25px; background: var(--primary-blue); border:none; color:white; font-weight:bold; cursor:pointer;" onclick="nextQuestion()">التالي</button>
             </div>
         </div>
     </section>
 
     <section id="staff">
         <h2 class="section-title">طاقم الإدارة</h2>
-        <div class="maintenance-card red">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h2 style="color: var(--error-red); margin-bottom: 15px;">القسم مغلق للصيانة</h2>
-            <p style="color: #ccc;">يتم حالياً إعادة هيكلة الطاقم الإداري وتحديث القائمة. شكراً لتفهمكم.</p>
+        <div style="text-align:center; padding:50px; border:2px dashed #555; border-radius:20px;">
+            <i class="fas fa-tools" style="font-size:50px; color:var(--primary-blue);"></i>
+            <h3>القسم قيد التحديث</h3>
         </div>
     </section>
 
@@ -194,49 +201,34 @@
     </footer>
 
     <script>
-        let currentStep = 0;
-        let score = 0;
-        const questions = document.querySelectorAll('.question');
-
-        function selectOption(el, index) {
-            const currentQuestion = questions[currentStep];
-            currentQuestion.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            el.classList.add('selected');
-            el.parentElement.parentElement.dataset.userAnswer = index;
+        function acceptTerms() {
+            alert("الأسئلة قيد الإضافة");
         }
 
-        function nextQuestion() {
-            const currentQuestion = questions[currentStep];
-            if (!currentQuestion.dataset.userAnswer) {
-                alert("يرجى اختيار إجابة!");
-                return;
-            }
+        function startTimer() {
+            const btnDecline = document.getElementById('btn-decline');
+            const btnAccept = document.getElementById('btn-accept');
+            const declineText = document.getElementById('decline-text');
+            let timeLeft = 20;
 
-            if (currentQuestion.dataset.userAnswer == currentQuestion.dataset.correct) score++;
+            // تعطيل الأزرار
+            btnDecline.classList.add('disabled');
+            btnAccept.classList.add('disabled');
 
-            currentQuestion.classList.remove('active');
-            currentStep++;
+            const timer = setInterval(() => {
+                declineText.innerText = `انتظر ${timeLeft} ثانية...`;
+                timeLeft--;
 
-            if (currentStep < questions.length) {
-                questions[currentStep].classList.add('active');
-                document.getElementById('progress').innerText = `سؤال ${currentStep + 1} من ${questions.length}`;
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            document.getElementById('quiz-controls').style.display = 'none';
-            const resultArea = document.getElementById('result-area');
-            resultArea.style.display = 'block';
-            
-            if (score >= 2) {
-                resultArea.innerHTML = `<h3 style="color:var(--success-green)">ناجح! (${score}/2)</h3><p>توجه للديسكورد لاستلام الرتبة.</p><a href="https://discord.gg/YWFY5g4bY" class="btn-main btn-discord" style="margin:20px auto; width:fit-content;">دخول الديسكورد</a>`;
-            } else {
-                resultArea.innerHTML = `<h3 style="color:var(--error-red)">راسب (${score}/2)</h3><button onclick="location.reload()" style="padding:10px; margin-top:10px;">إعادة المحاولة</button>`;
-            }
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    declineText.innerText = "غير موافق على الشروط";
+                    btnDecline.classList.remove('disabled');
+                    btnAccept.classList.remove('disabled');
+                }
+            }, 1000);
         }
     </script>
 
 </body>
 </html>
+ 

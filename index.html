@@ -97,10 +97,9 @@
         .action-label { color: #888; font-weight: bold; font-size: 16px; }
         .disabled-action { pointer-events: none; filter: grayscale(1); opacity: 0.5; }
 
-        /* استعادة تنسيق الفورم الأصلي */
         #activation-questions { display: none; background: var(--dark-section); padding: 40px; border-radius: 20px; max-width: 800px; margin: 0 auto; border: 1px solid var(--primary-blue); animation: fadeIn 0.5s; }
-        .q-input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: rgba(0,0,0,0.5); color: #fff; font-family: 'Cairo'; outline: none; }
-        .q-input:focus { border-color: var(--primary-blue); }
+        .q-input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: rgba(0,0,0,0.5); color: #fff; font-family: 'Cairo'; outline: none; transition: 0.3s; }
+        .q-input:focus { border-color: var(--primary-blue); box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); }
         .q-label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--purple-accent); }
 
         .founders-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 50px; }
@@ -231,17 +230,17 @@
 
         <div id="activation-questions">
             <h3 style="text-align:center; color:var(--primary-blue); margin-bottom:25px;">بيانات المواطن الجديد</h3>
-            <label class="q-label">الاسم الكامل:</label><input type="text" class="q-input">
-            <label class="q-label">العمر الحقيقي:</label><input type="number" class="q-input">
-            <label class="q-label">اسم الشخصية:</label><input type="text" class="q-input">
-            <label class="q-label">عمر الشخصية:</label><input type="number" class="q-input">
-            <label class="q-label">يوزرك في روبلوكس:</label><input type="text" class="q-input">
-            <label class="q-label">ماهي قصة الشخصية؟</label><textarea class="q-input" rows="3"></textarea>
+            <label class="q-label">الاسم الكامل:</label><input type="text" class="q-input" id="real-name">
+            <label class="q-label">العمر الحقيقي:</label><input type="number" class="q-input" id="real-age">
+            <label class="q-label">اسم الشخصية:</label><input type="text" class="q-input" id="char-name">
+            <label class="q-label">عمر الشخصية:</label><input type="number" class="q-input" id="char-age">
+            <label class="q-label">يوزرك في روبلوكس:</label><input type="text" class="q-input" id="roblox-user">
+            <label class="q-label">ماهي قصة الشخصية؟</label><textarea class="q-input" rows="3" id="char-story"></textarea>
             
             <label class="q-label">سيناريو سائق الأجرة: اتصل بك شخصان، أحدهما يدفع $13 لمشوار قصير والآخر لمشوار بعيد لمنطقة مشبوهة، ماذا تختار ولماذا؟</label>
-            <textarea class="q-input" rows="4"></textarea>
+            <textarea class="q-input" rows="4" id="scenario"></textarea>
             
-            <button class="btn-main btn-discord" style="width:100%; border:none; cursor:pointer;" onclick="alert('تم إرسال طلبك للإدارة بنجاح!')">إرسال الطلب</button>
+            <button class="btn-main btn-discord" style="width:100%; border:none; cursor:pointer;" id="submit-btn" onclick="sendToDiscord()">إرسال الطلب</button>
         </div>
     </section>
 
@@ -258,6 +257,74 @@
     </footer>
 
     <script>
+        // رابط الويب هوك الخاص بك
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1487461444600729670/WpeDGmceBuQZgQye5ts7a0CuzJu7r3cdrHXbKiRi_mYJ0PMtXOAkkEXy1zNGo7SfxHD3';
+
+        async function sendToDiscord() {
+            const submitBtn = document.getElementById('submit-btn');
+            
+            // جمع البيانات
+            const data = {
+                realName: document.getElementById('real-name').value,
+                realAge: document.getElementById('real-age').value,
+                charName: document.getElementById('char-name').value,
+                charAge: document.getElementById('char-age').value,
+                robloxUser: document.getElementById('roblox-user').value,
+                charStory: document.getElementById('char-story').value,
+                scenario: document.getElementById('scenario').value
+            };
+
+            // التحقق من تعبئة جميع الحقول
+            if (!data.realName || !data.robloxUser || !data.charName || !data.charStory || !data.scenario) {
+                alert('يرجى تعبئة جميع الحقول قبل الإرسال.');
+                return;
+            }
+
+            // تعطيل الزر أثناء الإرسال
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري الإرسال...";
+
+            // تجهيز رسالة الـ Embed للديسكورد
+            const embedMessage = {
+                username: "نظام التفعيل - ريوت سايد",
+                avatar_url: "https://i.imgur.com/5BkALp7.png",
+                embeds: [{
+                    title: "📝 طلب تفعيل جديد",
+                    color: 3447003, // اللون الأزرق
+                    fields: [
+                        { name: "👤 الاسم الحقيقي", value: data.realName, inline: true },
+                        { name: "🎂 العمر", value: data.realAge, inline: true },
+                        { name: "🎮 يوزر روبلوكس", value: data.robloxUser, inline: true },
+                        { name: "🎭 اسم الشخصية", value: data.charName, inline: true },
+                        { name: "⏳ عمر الشخصية", value: data.charAge, inline: true },
+                        { name: "📜 قصة الشخصية", value: "```" + data.charStory + "```" },
+                        { name: "🚕 سيناريو سائق الأجرة", value: "```" + data.scenario + "```" }
+                    ],
+                    footer: { text: "Riot Side Roleplay | " + new Date().toLocaleString('ar-EG') },
+                    timestamp: new Date()
+                }]
+            };
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(embedMessage)
+                });
+
+                if (response.ok) {
+                    alert('✅ تم إرسال طلبك بنجاح! سيتم مراجعته من قبل الإدارة.');
+                    location.reload(); // إعادة تحميل الصفحة لتصفير الحقول
+                } else {
+                    throw new Error('فشل الإرسال');
+                }
+            } catch (error) {
+                alert('❌ حدث خطأ أثناء الإرسال. تأكد من اتصالك بالإنترنت وحاول مجدداً.');
+                submitBtn.disabled = false;
+                submitBtn.innerText = "إرسال الطلب";
+            }
+        }
+
         function handleAccept() {
             document.getElementById('terms-box').style.display = 'none';
             document.getElementById('activation-questions').style.display = 'block';

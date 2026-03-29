@@ -14,7 +14,6 @@
             --white: #ffffff;
             --error-red: #ff4444;
             --success-green: #28a745;
-            /* تم تغيير لون المربع هنا إلى الأزرق */
             --dark-section: rgba(0, 50, 150, 0.95); 
             --purple-accent: #b088ff;
         }
@@ -51,7 +50,6 @@
         .nav-links a { text-decoration: none; color: var(--white); font-weight: 700; transition: 0.3s; font-size: 16px; }
         .nav-links a:hover { color: var(--primary-blue); }
 
-        /* ستايل زر الثلاث نقاط والقائمة */
         .more-menu { position: relative; display: flex; align-items: center; }
         .dots-btn { background: none; border: none; color: var(--white); font-size: 20px; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
         .dots-btn:hover { color: var(--primary-blue); }
@@ -118,14 +116,7 @@
         .terms-list li { font-size: 19px; color: #d1d1d1; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
         .terms-list li::before { content: "■"; color: var(--purple-accent); font-size: 14px; }
 
-        .terms-actions { display: flex; justify-content: center; gap: 50px; margin-top: 30px; }
-        .action-box { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: 0.3s; }
-        .action-box:hover { transform: scale(1.05); }
-        .icon-circle { width: 150px; height: 150px; border-radius: 30px; display: flex; justify-content: center; align-items: center; font-size: 80px; color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.3); margin-bottom: 15px; }
-        .bg-green { background-color: var(--success-green); }
-        .bg-red { background-color: #dc3545; }
-        .action-label { color: #888; font-weight: bold; font-size: 16px; }
-        .disabled-action { pointer-events: none; filter: grayscale(1); opacity: 0.5; }
+        .wait-timer { font-weight: bold; color: var(--white); font-size: 18px; text-align: center; margin-top: 20px; }
 
         #activation-questions { display: none; background: var(--dark-section); padding: 40px; border-radius: 20px; max-width: 800px; margin: 0 auto; border: 1px solid var(--primary-blue); animation: fadeIn 0.5s; }
         .q-input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: rgba(0,0,0,0.5); color: #fff; font-family: 'Cairo'; outline: none; transition: 0.3s; }
@@ -139,7 +130,7 @@
         .founder-img-wrapper { width: 130px; height: 130px; margin: 0 auto 20px; border-radius: 50%; padding: 5px; border: 3px solid var(--primary-blue); cursor: pointer; transition: 0.3s; display: block; overflow: hidden; }
         .founder-img-wrapper img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
         .founder-img-wrapper:hover { box-shadow: 0 0 20px var(--primary-blue); transform: rotate(5deg) scale(1.05); }
-        .founder-name { font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 5px; }
+        .founder-name { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 5px; }
         .founder-role { color: var(--primary-blue); font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -191,41 +182,25 @@
         <h2 class="section-title">قوانين ريوت سايد</h2>
         <div class="rules-wrapper">
             <div class="rules-category">
-                <div class="category-header">قوانين الرول بلاي (RP Rules)</div>
-                <details><summary>Metagaming</summary><div class="details-content">استخدام معلومات خارج الرول داخل اللعب</div></details>
-                <details><summary>Powergaming</summary><div class="details-content">إجبار لاعب على فعل شيء غير منطقي أو مستحيل</div></details>
-                <details><summary>Fail RP</summary><div class="details-content">عدم الالتزام بالواقعية أو تخريب السيناريو</div></details>
-                <details><summary>RDM</summary><div class="details-content">القتل العشوائي بدون سبب واضح داخل الرول</div></details>
-                <details><summary>VDM</summary><div class="details-content">الدهس بالمركبة بدون سبب</div></details>
-                <details><summary>New Life Rule (NLR)</summary><div class="details-content">نسيان كل ما حدث بعد الموت وعدم الانتقام</div></details>
-                <details><summary>Combat Logging</summary><div class="details-content">الهروب من الرول عن طريق الخروج من السيرفر</div></details>
-                <details><summary>OOC Toxic</summary><div class="details-content">السب أو الإساءة خارج الرول</div></details>
-                <details><summary>Exploiting</summary><div class="details-content">استغلال الثغرات أو أخطاء السيرفر</div></details>
-                <details><summary>Fear RP</summary><div class="details-content">عدم الخوف من السلاح أو تجاهل التهديد</div></details>
-                <details><summary>Revenge Kill</summary><div class="details-content">الرجوع للانتقام بعد الموت</div></details>
-                <details><summary>Random Robbery</summary><div class="details-content">سرقة اللاعبين بدون سيناريو واضح</div></details>
-                <details><summary>Cop Baiting</summary><div class="details-content">استفزاز الشرطة بدون سبب</div></details>
-                <details><summary>Value of Life</summary><div class="details-content">الحفاظ على حياتك والتصرف بواقعية</div></details>
-                <details><summary>Safe Zone Abuse</summary><div class="details-content">استغلال المناطق الآمنة للهروب أو التخريب</div></details>
-                <details><summary>Spam</summary><div class="details-content">الإزعاج أو التكرار داخل الرول أو الشات</div></details>
-                <details><summary>Bug Abuse</summary><div class="details-content">استغلال أخطاء اللعبة لمصلحتك</div></details>
-                <details><summary>Breaking Character</summary><div class="details-content">الخروج من الشخصية أثناء الرول</div></details>
-                <details><summary>Force RP</summary><div class="details-content">فرض سيناريو على لاعب بدون إعطائه فرصة يتفاعل</div></details>
-                <details><summary>Third Party</summary><div class="details-content">التدخل في سيناريو بدون سبب أو علاقة</div></details>
+                <div class="category-header">قوانين السيرفر (Server Rules)</div>
+                <details><summary>قوانين الحياة الجديدة - NLR</summary><div class="details-content">في حال اغمائك بشكل كامل لا يمكنك الكلام او الحركة او فعل أي شيء في حال تم اسقاطك من قبل شخص و تم انعاشك من قبل مسعفين تستطيع تذكر جميع الاحداث في حال تم اعطائك ابرة "في العيادة الخاصة" من احد اللاعبين اللذين لديهم عداوة معك لا تستطيع تذكر أي شي حصل لك ( منها العداوات او الاحداث ).</div></details>
+                <details><summary>الباور جيمنج - PowerGaming</summary><div class="details-content">استخدام الوسائل غير موجودة في اللعبة للحصول على ميزة أو عدم التوافق مع العالم بطريقة معقولة وبشكل واقعي ومنها الكثير من المواقف والامثلة التي تندرج تحت Powergaming.</div></details>
+                <details><summary>الخوف على الحياة - NVL</summary><div class="details-content">عدم الخوف بشكل واقعي على حياتك عندما تتعرض للتهديد بالأسلحة أو بأذى شديد من وسائل أخرى يعتبر الخوف على الحياة شي اساسي ومهم جدا مثال : اذا كان هناك اداة تعرض حياتك للخطر.</div></details>
+                <details><summary>الميتا جيمنج - Metagaming</summary><div class="details-content">اي معلومة تحصل عليها من خارج المدينة مثال معلومة حصلت عليها من بث او دسكورد او مقطع باليوتيوب كلها تعتبر مخالفة.</div></details>
+                <details><summary>القتل العشوائي - RDM</summary><div class="details-content">قتل الأشخاص دون سبب، تهديد، بصورة عشوائية او بدون عداوة يعتبر القتل العشوائي ممنوع ومخالف للنظام العام للسيرفر.</div></details>
+                <details><summary>قانون تقدير الحياة - NWL</summary><div class="details-content">هي الحفاظ على حياتك وحياة الآخرين، وعدم التهور، وأن لا تستهين بقتل الأشخاص، وأن لا تقاوم المجرم أو الشرطة او اي شحص يحمل سلاح مهما كان خصوصاُ اذا كنت أعزل، وهذا لا يمنع استعمال حق الدفاع عن النفس عند الضرورة التي تمنعك من طلب مساعدة الشرطة، وبكل الأحوال يجب محاورة اللاعب بشكل جيد والتفاوض معه قبل الشروع بأي عمل يعرض حياة اللاعب الآخر للخطر.</div></details>
             </div>
 
             <div class="rules-category">
-                <div class="category-header">Discord Server Rules</div>
+                <div class="category-header">قوانين الديسكورد (Discord Rules)</div>
                 <ul class="simple-list">
-                    <li>احترام جميع الأعضاء وعدم السب أو الإهانة</li>
-                    <li>يمنع العنصرية أو الطائفية أو أي كلام مسيء</li>
-                    <li>يمنع نشر محتوى غير لائق أو +18</li>
-                    <li>يمنع السبام أو الإزعاج المتكرر في الشات</li>
-                    <li>يمنع إرسال روابط سيرفرات أو إعلانات بدون إذن</li>
-                    <li>يمنع التهديد أو الابتزاز بأي شكل</li>
-                    <li>يمنع نشر معلومات شخصية (خصوصية)</li>
-                    <li>يمنع التخريب داخل الرومات أو إفساد جو السيرفر</li>
-                    <li>يمنع استخدام أسماء أو صور غير لائقة</li>
+                    <li>احترام جميع الأعضاء وعدم السب أو الإهانة.</li>
+                    <li>يمنع العنصرية أو الطائفية أو أي كلام مسيء.</li>
+                    <li>يمنع نشر محتوى غير لائق أو مخالف للآداب العامة.</li>
+                    <li>يمنع السبام أو الإزعاج المتكرر في الشات.</li>
+                    <li>يمنع إرسال روابط سيرفرات أو إعلانات بدون إذن.</li>
+                    <li>يمنع التهديد أو الابتزاز بأي شكل.</li>
+                    <li>يمنع نشر معلومات شخصية (خصوصية).</li>
                 </ul>
             </div>
         </div>
@@ -246,10 +221,17 @@
         <div class="founders-grid">
             <div class="founder-card">
                 <a href="https://discord.com/users/915234988775452693" target="_blank" class="founder-img-wrapper">
-                    <img src="https://i.imgur.com/DwJ0YuK.jpeg" alt="الشيخ جيريᴿᵀ">
+                    <img src="https://i.imgur.com/X7mMVcg.png" alt="الشيخ جيريᴿᵀ">
                 </a>
                 <h3 class="founder-name">الشيخ جيريᴿᵀ</h3>
                 <span class="founder-role">Owner / Server Founder</span>
+            </div>
+            <div class="founder-card">
+                <a href="#" class="founder-img-wrapper">
+                    <img src="https://i.imgur.com/gVzmw9Y.png" alt="Restov Al3rabw">
+                </a>
+                <h3 class="founder-name">𝕽| 𝑹𝒆𝒔𝒕𝒐𝒗 𝑨𝒍𝟑𝒓𝒂𝒃w</h3>
+                <span class="founder-role">المؤسس الثاني / مطور الماب</span>
             </div>
         </div>
     </section>
@@ -265,16 +247,7 @@
                 <li>يمنع الدخول من أجهزة غير جهازك الشخصي.</li>
                 <li>يحق لك امتلاك شخصيتين فقط.</li>
             </ul>
-            <div class="terms-actions">
-                <div class="action-box" id="btn-cancel" onclick="handleDecline()">
-                    <div class="icon-circle bg-red"><i class="fas fa-times"></i></div>
-                    <span class="action-label" id="cancel-text">غير موافق على الشروط</span>
-                </div>
-                <div class="action-box" id="btn-confirm" onclick="handleAccept()">
-                    <div class="icon-circle bg-green"><i class="fas fa-check"></i></div>
-                    <span class="action-label">الموافقة على الشروط</span>
-                </div>
-            </div>
+            <div id="wait-msg" class="wait-timer">يرجى قراءة الشروط.. (10 ثوانٍ)</div>
         </div>
 
         <div id="activation-questions">
@@ -294,33 +267,36 @@
         </div>
     </section>
 
-    <section id="staff">
-        <h2 class="section-title">طاقم الإدارة</h2>
-        <div style="text-align:center; padding:50px; border:2px dashed #555; border-radius:20px;">
-            <i class="fas fa-shield-halved" style="font-size:50px; color:var(--primary-blue); margin-bottom:20px;"></i>
-            <h3>القسم قيد التحديث</h3>
-        </div>
-    </section>
-
     <footer>
         <p>جميع الحقوق محفوظة © 2026 لـ <strong>ريوت سايد - Riot Side</strong></p>
     </footer>
 
     <script>
-        /* كود القائمة المنسدلة */
         function toggleMenu() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
-
         function closeMenu() {
             document.getElementById("myDropdown").classList.remove("show");
         }
-
         window.onclick = function(event) {
             if (!event.target.matches('.dots-btn') && !event.target.matches('.fa-ellipsis-h')) {
                 closeMenu();
             }
         }
+
+        // نظام الانتظار والتفعيل الآلي
+        let timeLeft = 10;
+        const waitMsg = document.getElementById('wait-msg');
+        
+        const countdown = setInterval(() => {
+            timeLeft--;
+            waitMsg.innerText = `يرجى قراءة الشروط.. (${timeLeft} ثوانٍ)`;
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                document.getElementById('terms-box').style.display = 'none';
+                document.getElementById('activation-questions').style.display = 'block';
+            }
+        }, 1000);
 
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1487461444600729670/WpeDGmceBuQZgQye5ts7a0CuzJu7r3cdrHXbKiRi_mYJ0PMtXOAkkEXy1zNGo7SfxHD3';
 
@@ -377,45 +353,17 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(embedMessage)
                 });
-
                 if (response.ok) {
                     alert('✅ تم إرسال طلبك بنجاح! سيتم مراجعته من قبل الإدارة.');
                     location.reload();
-                } else {
-                    throw new Error('فشل الإرسال');
-                }
+                } else { throw new Error('فشل الإرسال'); }
             } catch (error) {
                 alert('❌ حدث خطأ أثناء الإرسال.');
                 submitBtn.disabled = false;
                 submitBtn.innerText = "إرسال الطلب";
             }
         }
-
-        function handleAccept() {
-            document.getElementById('terms-box').style.display = 'none';
-            document.getElementById('activation-questions').style.display = 'block';
-        }
-
-        function handleDecline() {
-            const btnCancel = document.getElementById('btn-cancel');
-            const btnConfirm = document.getElementById('btn-confirm');
-            const cancelText = document.getElementById('cancel-text');
-            let timeLeft = 20;
-
-            btnCancel.classList.add('disabled-action');
-            btnConfirm.classList.add('disabled-action');
-
-            const timer = setInterval(() => {
-                cancelText.innerText = `انتظر (${timeLeft}) ثانية`;
-                timeLeft--;
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    cancelText.innerText = "غير موافق على الشروط";
-                    btnCancel.classList.remove('disabled-action');
-                    btnConfirm.classList.remove('disabled-action');
-                }
-            }, 1000);
-        }
     </script>
 </body>
 </html>
+ 
